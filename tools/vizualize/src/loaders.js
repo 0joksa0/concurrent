@@ -1,7 +1,9 @@
 export async function loadSampleData() {
+  const sampleNodesUrl = withBase('sample/nodes.json');
+  const sampleTraceUrl = withBase('sample/trace.jsonl');
   const [nodesRes, traceRes] = await Promise.all([
-    fetch('/sample/nodes.json'),
-    fetch('/sample/trace.jsonl')
+    fetch(sampleNodesUrl),
+    fetch(sampleTraceUrl)
   ]);
 
   if (!nodesRes.ok || !traceRes.ok) {
@@ -15,7 +17,7 @@ export async function loadSampleData() {
 }
 
 export async function loadPrebuiltScenarios() {
-  const indexRes = await fetch('/scenarios/index.json');
+  const indexRes = await fetch(withBase('scenarios/index.json'));
   if (!indexRes.ok) {
     throw new Error('Failed to load /scenarios/index.json');
   }
@@ -37,8 +39,8 @@ export async function loadPrebuiltScenarios() {
     }
 
     const [nodesRes, traceRes] = await Promise.all([
-      fetch(`/scenarios/${nodesPath}`),
-      fetch(`/scenarios/${tracePath}`)
+      fetch(withBase(`scenarios/${nodesPath}`)),
+      fetch(withBase(`scenarios/${tracePath}`))
     ]);
     if (!nodesRes.ok || !traceRes.ok) {
       continue;
@@ -182,4 +184,11 @@ export function parseJsonLines(text) {
 
   events.sort((a, b) => Number(a.timestamp_us || 0) - Number(b.timestamp_us || 0));
   return events;
+}
+
+function withBase(path) {
+  const base = String(import.meta.env.BASE_URL || '/');
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanPath = String(path || '').replace(/^\/+/, '');
+  return `${cleanBase}${cleanPath}`;
 }
