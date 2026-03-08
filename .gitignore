@@ -30,8 +30,10 @@ Makefile
 build/
 out/
 compile_commands.json
+.cache/
 
 # === Logs ===
 *.log
+
 
 

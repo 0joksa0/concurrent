@@ -1,6 +1,4 @@
-// Generalize the signal pattern so that it works both ways. Thread A has to wait for Thread B and vice versa. In other words, given this code
-
-#include <bits/pthreadtypes.h>
+#include "littleBookOfSemaphores/rendezvous.h"
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
@@ -12,7 +10,8 @@ typedef struct randezvous {
 
 } rendezvous_t;
 
-void* threadA(void* arg)
+
+static void* threadA(void* arg)
 {
     rendezvous_t* r = (rendezvous_t*)arg;
     pthread_t tid = pthread_self();
@@ -25,7 +24,7 @@ void* threadA(void* arg)
     printf("A2 (%lu)\n", tid);
     return NULL;
 }
-void* threadB(void* arg)
+static void* threadB(void* arg)
 {
     rendezvous_t* r = (rendezvous_t*)arg;
     pthread_t tid = pthread_self();

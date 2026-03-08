@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_C_STANDARD 99)
-project(konkurentno C)
+project(concurrent C)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out/${CMAKE_BUILD_TYPE})
 
 enable_testing()
 
-add_executable(konkurentno src/main.c)
-target_include_directories(konkurentno PRIVATE ${CMAKE_SOURCE_DIR}/include)
+add_executable(concurrent src/main.c)
+target_include_directories(concurrent PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB EXTRA_SOURCES "src/*.c")
+file(GLOB EXTRA_SOURCES "src/*.c" "src/*/*.c")
 list(REMOVE_ITEM EXTRA_SOURCES "${CMAKE_SOURCE_DIR}/src/main.c")
-target_sources(konkurentno PRIVATE ${EXTRA_SOURCES})
+target_sources(concurrent PRIVATE ${EXTRA_SOURCES})
 
 
 option(BUILD_TESTS "Build Criterion tests" OFF)
@@ -34,9 +34,9 @@ endif()
 # ───── coverage (only for GCC/Clang) ─────
 option(COVERAGE "Enable coverage flags" OFF)
 if(COVERAGE AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(konkurentno PRIVATE
+    target_compile_options(concurrent PRIVATE
         -O0 -g --coverage)
-    target_link_options(konkurentno PRIVATE --coverage)
+    target_link_options(concurrent PRIVATE --coverage)
     if(TARGET tests)
         target_compile_options(tests PRIVATE -O0 -g --coverage)
         target_link_options(tests PRIVATE --coverage)
@@ -44,7 +44,7 @@ if(COVERAGE AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 
-install(TARGETS konkurentno 
+install(TARGETS concurrent 
         RUNTIME DESTINATION bin)
 
 install(DIRECTORY include/
