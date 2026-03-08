@@ -1,0 +1,975 @@
+[
+  {
+    "id": "deadlock_a_wait_fork_a_before",
+    "type": "sync",
+    "label": "A waits fork A",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 18
+  },
+  {
+    "id": "deadlock_a_wait_fork_a_after",
+    "type": "sync",
+    "label": "A acquired fork A",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 21
+  },
+  {
+    "id": "deadlock_a_wait_fork_b_before",
+    "type": "sync",
+    "label": "A waits fork B (blocked)",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 26
+  },
+  {
+    "id": "deadlock_a_wait_fork_b_after",
+    "type": "sync",
+    "label": "A acquired fork B",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 29
+  },
+  {
+    "id": "deadlock_b_wait_fork_b_before",
+    "type": "sync",
+    "label": "B waits fork B",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 40
+  },
+  {
+    "id": "deadlock_b_wait_fork_b_after",
+    "type": "sync",
+    "label": "B acquired fork B",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 43
+  },
+  {
+    "id": "deadlock_b_wait_fork_a_before",
+    "type": "sync",
+    "label": "B waits fork A (blocked)",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 48
+  },
+  {
+    "id": "deadlock_b_wait_fork_a_after",
+    "type": "sync",
+    "label": "B acquired fork A",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 51
+  },
+  {
+    "id": "deadlock_start",
+    "type": "thread",
+    "label": "Deadlock demo starts",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 59
+  },
+  {
+    "id": "deadlock_create_a",
+    "type": "thread",
+    "label": "Create deadlock thread A",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 69
+  },
+  {
+    "id": "deadlock_create_b",
+    "type": "thread",
+    "label": "Create deadlock thread B",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 73
+  },
+  {
+    "id": "deadlock_create_watchdog",
+    "type": "thread",
+    "label": "Create deadlock watchdog thread",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 77
+  },
+  {
+    "id": "deadlock_timeout",
+    "type": "thread",
+    "label": "Deadlock watchdog timeout reached",
+    "file": "src/littleBookOfSemaphores/advanced/deadlock.c",
+    "line": 79
+  },
+  {
+    "id": "starvation_reader_wait_mutex_before",
+    "type": "sync",
+    "label": "Reader waits mutex",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 33
+  },
+  {
+    "id": "starvation_reader_wait_mutex_after",
+    "type": "sync",
+    "label": "Reader acquired mutex",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 36
+  },
+  {
+    "id": "starvation_reader_wait_room_before",
+    "type": "sync",
+    "label": "First reader waits room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 41
+  },
+  {
+    "id": "starvation_reader_wait_room_after",
+    "type": "sync",
+    "label": "First reader acquired room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 44
+  },
+  {
+    "id": "starvation_reader_post_mutex_before",
+    "type": "sync",
+    "label": "Reader posts mutex",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 48
+  },
+  {
+    "id": "starvation_reader_post_mutex_after",
+    "type": "sync",
+    "label": "Reader released mutex",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 51
+  },
+  {
+    "id": "starvation_reader_read",
+    "type": "critical",
+    "label": "Reader in critical section (reading)",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 54
+  },
+  {
+    "id": "starvation_reader_wait_mutex2_before",
+    "type": "sync",
+    "label": "Reader waits mutex to exit",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 58
+  },
+  {
+    "id": "starvation_reader_wait_mutex2_after",
+    "type": "sync",
+    "label": "Reader acquired mutex to exit",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 61
+  },
+  {
+    "id": "starvation_reader_post_room_before",
+    "type": "sync",
+    "label": "Last reader posts room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 66
+  },
+  {
+    "id": "starvation_reader_post_room_after",
+    "type": "sync",
+    "label": "Last reader released room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 69
+  },
+  {
+    "id": "starvation_reader_post_mutex2_before",
+    "type": "sync",
+    "label": "Reader posts mutex after exit",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 73
+  },
+  {
+    "id": "starvation_reader_post_mutex2_after",
+    "type": "sync",
+    "label": "Reader released mutex after exit",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 76
+  },
+  {
+    "id": "starvation_writer_wait_room_before",
+    "type": "sync",
+    "label": "Writer waits room_empty (starving)",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 89
+  },
+  {
+    "id": "starvation_writer_wait_room_after",
+    "type": "sync",
+    "label": "Writer acquired room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 92
+  },
+  {
+    "id": "starvation_writer_write",
+    "type": "critical",
+    "label": "Writer in critical section (writing)",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 95
+  },
+  {
+    "id": "starvation_writer_post_room_before",
+    "type": "sync",
+    "label": "Writer posts room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 99
+  },
+  {
+    "id": "starvation_writer_post_room_after",
+    "type": "sync",
+    "label": "Writer released room_empty",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 102
+  },
+  {
+    "id": "starvation_start",
+    "type": "thread",
+    "label": "Starvation demo starts (reader preference)",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 109
+  },
+  {
+    "id": "starvation_create_reader",
+    "type": "thread",
+    "label": "Create reader thread",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 124
+  },
+  {
+    "id": "starvation_create_writer",
+    "type": "thread",
+    "label": "Create writer thread",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 129
+  },
+  {
+    "id": "starvation_create_watchdog",
+    "type": "thread",
+    "label": "Create starvation watchdog thread",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 133
+  },
+  {
+    "id": "starvation_timeout",
+    "type": "thread",
+    "label": "Starvation watchdog timeout reached",
+    "file": "src/littleBookOfSemaphores/advanced/starvation.c",
+    "line": 135
+  },
+  {
+    "id": "multiplex_wait_before",
+    "type": "sync",
+    "label": "Worker waits on multiplex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/multiplex.c",
+    "line": 18
+  },
+  {
+    "id": "multiplex_wait_after",
+    "type": "sync",
+    "label": "Worker entered critical section",
+    "file": "src/littleBookOfSemaphores/basic/multiplex.c",
+    "line": 21
+  },
+  {
+    "id": "multiplex_post_before",
+    "type": "sync",
+    "label": "Worker releases multiplex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/multiplex.c",
+    "line": 27
+  },
+  {
+    "id": "multiplex_post_after",
+    "type": "sync",
+    "label": "Worker released multiplex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/multiplex.c",
+    "line": 30
+  },
+  {
+    "id": "mutex_threadA_wait_before",
+    "type": "sync",
+    "label": "Thread A waits mutex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 17
+  },
+  {
+    "id": "mutex_threadA_wait_after",
+    "type": "sync",
+    "label": "Thread A entered critical section",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 20
+  },
+  {
+    "id": "mutex_threadA_post_before",
+    "type": "sync",
+    "label": "Thread A releases mutex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 25
+  },
+  {
+    "id": "mutex_threadA_post_after",
+    "type": "sync",
+    "label": "Thread A exited critical section",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 28
+  },
+  {
+    "id": "mutex_threadB_wait_before",
+    "type": "sync",
+    "label": "Thread B waits mutex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 37
+  },
+  {
+    "id": "mutex_threadB_wait_after",
+    "type": "sync",
+    "label": "Thread B entered critical section",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 40
+  },
+  {
+    "id": "mutex_threadB_post_before",
+    "type": "sync",
+    "label": "Thread B releases mutex semaphore",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 45
+  },
+  {
+    "id": "mutex_threadB_post_after",
+    "type": "sync",
+    "label": "Thread B exited critical section",
+    "file": "src/littleBookOfSemaphores/basic/mutex.c",
+    "line": 48
+  },
+  {
+    "id": "rendezvous_a_post_before",
+    "type": "sync",
+    "label": "Thread A posts semA",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 23
+  },
+  {
+    "id": "rendezvous_a_wait_before",
+    "type": "sync",
+    "label": "Thread A waits semB",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 26
+  },
+  {
+    "id": "rendezvous_a_wait_after",
+    "type": "sync",
+    "label": "Thread A passed semB wait",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 29
+  },
+  {
+    "id": "rendezvous_b_post_before",
+    "type": "sync",
+    "label": "Thread B posts semB",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 43
+  },
+  {
+    "id": "rendezvous_b_wait_before",
+    "type": "sync",
+    "label": "Thread B waits semA",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 46
+  },
+  {
+    "id": "rendezvous_b_wait_after",
+    "type": "sync",
+    "label": "Thread B passed semA wait",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 49
+  },
+  {
+    "id": "rendezvous_start",
+    "type": "thread",
+    "label": "Rendezvous function starts",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 59
+  },
+  {
+    "id": "rendezvous_create_threadA",
+    "type": "thread",
+    "label": "Create threadA context",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 66
+  },
+  {
+    "id": "rendezvous_create_threadB",
+    "type": "thread",
+    "label": "Create threadB context",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 69
+  },
+  {
+    "id": "rendezvous_join_done",
+    "type": "thread",
+    "label": "Rendezvous threads joined",
+    "file": "src/littleBookOfSemaphores/basic/rendezvous.c",
+    "line": 77
+  },
+  {
+    "id": "dining_create_philosopher_0",
+    "type": "thread",
+    "label": "Create philosopher thread #0",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 21
+  },
+  {
+    "id": "dining_create_philosopher_1",
+    "type": "thread",
+    "label": "Create philosopher thread #1",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 23
+  },
+  {
+    "id": "dining_create_philosopher_2",
+    "type": "thread",
+    "label": "Create philosopher thread #2",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 25
+  },
+  {
+    "id": "dining_create_philosopher_3",
+    "type": "thread",
+    "label": "Create philosopher thread #3",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 27
+  },
+  {
+    "id": "dining_create_philosopher_4",
+    "type": "thread",
+    "label": "Create philosopher thread #4",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 29
+  },
+  {
+    "id": "dining_think",
+    "type": "action",
+    "label": "Philosopher thinks",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 46
+  },
+  {
+    "id": "dining_wait_room_before",
+    "type": "sync",
+    "label": "Wait for room semaphore",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 50
+  },
+  {
+    "id": "dining_wait_room_after",
+    "type": "sync",
+    "label": "Room semaphore acquired",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 53
+  },
+  {
+    "id": "dining_wait_left_before",
+    "type": "sync",
+    "label": "Wait for left fork",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 56
+  },
+  {
+    "id": "dining_wait_left_after",
+    "type": "sync",
+    "label": "Left fork acquired",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 59
+  },
+  {
+    "id": "dining_wait_right_before",
+    "type": "sync",
+    "label": "Wait for right fork",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 62
+  },
+  {
+    "id": "dining_wait_right_after",
+    "type": "sync",
+    "label": "Right fork acquired",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 65
+  },
+  {
+    "id": "dining_eat",
+    "type": "action",
+    "label": "Philosopher eats",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 68
+  },
+  {
+    "id": "dining_release_right_before",
+    "type": "sync",
+    "label": "Release right fork",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 73
+  },
+  {
+    "id": "dining_release_left_before",
+    "type": "sync",
+    "label": "Release left fork",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 76
+  },
+  {
+    "id": "dining_release_room_before",
+    "type": "sync",
+    "label": "Release room semaphore",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 79
+  },
+  {
+    "id": "dining_done",
+    "type": "thread",
+    "label": "Philosopher thread done",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 84
+  },
+  {
+    "id": "dining_start",
+    "type": "thread",
+    "label": "Dining philosophers starts",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 91
+  },
+  {
+    "id": "dining_end",
+    "type": "thread",
+    "label": "Dining philosophers finished",
+    "file": "src/littleBookOfSemaphores/common/dining_philosophers.c",
+    "line": 124
+  },
+  {
+    "id": "pc_producer_wait_empty_before",
+    "type": "sync",
+    "label": "Producer waits empty slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 38
+  },
+  {
+    "id": "pc_producer_wait_empty_after",
+    "type": "sync",
+    "label": "Producer acquired empty slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 41
+  },
+  {
+    "id": "pc_producer_wait_mutex_before",
+    "type": "sync",
+    "label": "Producer waits buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 44
+  },
+  {
+    "id": "pc_producer_wait_mutex_after",
+    "type": "critical",
+    "label": "Producer entered buffer critical section",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 47
+  },
+  {
+    "id": "pc_producer_write_item",
+    "type": "critical",
+    "label": "Producer writes item to buffer",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 53
+  },
+  {
+    "id": "pc_producer_post_mutex_before",
+    "type": "critical",
+    "label": "Producer posts buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 56
+  },
+  {
+    "id": "pc_producer_post_mutex_after",
+    "type": "sync",
+    "label": "Producer released buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 59
+  },
+  {
+    "id": "pc_producer_post_full_before",
+    "type": "sync",
+    "label": "Producer posts full slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 62
+  },
+  {
+    "id": "pc_producer_post_full_after",
+    "type": "sync",
+    "label": "Producer signaled full slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 65
+  },
+  {
+    "id": "pc_producer_exit",
+    "type": "thread",
+    "label": "Producer thread exits",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 71
+  },
+  {
+    "id": "pc_consumer_wait_full_before",
+    "type": "sync",
+    "label": "Consumer waits full slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 85
+  },
+  {
+    "id": "pc_consumer_wait_full_after",
+    "type": "sync",
+    "label": "Consumer acquired full slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 88
+  },
+  {
+    "id": "pc_consumer_wait_mutex_before",
+    "type": "sync",
+    "label": "Consumer waits buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 91
+  },
+  {
+    "id": "pc_consumer_wait_mutex_after",
+    "type": "critical",
+    "label": "Consumer entered buffer critical section",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 94
+  },
+  {
+    "id": "pc_consumer_read_item",
+    "type": "critical",
+    "label": "Consumer reads item from buffer",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 100
+  },
+  {
+    "id": "pc_consumer_post_mutex_before",
+    "type": "critical",
+    "label": "Consumer posts buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 103
+  },
+  {
+    "id": "pc_consumer_post_mutex_after",
+    "type": "sync",
+    "label": "Consumer released buffer mutex",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 106
+  },
+  {
+    "id": "pc_consumer_post_empty_before",
+    "type": "sync",
+    "label": "Consumer posts empty slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 109
+  },
+  {
+    "id": "pc_consumer_post_empty_after",
+    "type": "sync",
+    "label": "Consumer signaled empty slot",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 112
+  },
+  {
+    "id": "pc_consumer_exit",
+    "type": "thread",
+    "label": "Consumer thread exits",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 118
+  },
+  {
+    "id": "pc_start",
+    "type": "thread",
+    "label": "Producer-consumer problem starts",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 125
+  },
+  {
+    "id": "pc_create_producer_0",
+    "type": "thread",
+    "label": "Create producer-0 thread",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 151
+  },
+  {
+    "id": "pc_create_producer_1",
+    "type": "thread",
+    "label": "Create producer-1 thread",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 154
+  },
+  {
+    "id": "pc_create_consumer_0",
+    "type": "thread",
+    "label": "Create consumer-0 thread",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 158
+  },
+  {
+    "id": "pc_create_consumer_1",
+    "type": "thread",
+    "label": "Create consumer-1 thread",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 161
+  },
+  {
+    "id": "pc_end",
+    "type": "thread",
+    "label": "Producer-consumer problem finished",
+    "file": "src/littleBookOfSemaphores/common/producer_consumer.c",
+    "line": 174
+  },
+  {
+    "id": "smoking_tobacco_wait_before",
+    "type": "sync",
+    "label": "Tobacco smoker waits signal",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 24
+  },
+  {
+    "id": "smoking_tobacco_wait_after",
+    "type": "sync",
+    "label": "Tobacco smoker received ingredients",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 27
+  },
+  {
+    "id": "smoking_tobacco_smoke",
+    "type": "action",
+    "label": "Tobacco smoker smokes",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 30
+  },
+  {
+    "id": "smoking_tobacco_post_agent_before",
+    "type": "sync",
+    "label": "Tobacco smoker posts agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 34
+  },
+  {
+    "id": "smoking_tobacco_post_agent_after",
+    "type": "sync",
+    "label": "Tobacco smoker posted agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 37
+  },
+  {
+    "id": "smoking_tobacco_exit",
+    "type": "thread",
+    "label": "Tobacco smoker exits",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 41
+  },
+  {
+    "id": "smoking_paper_wait_before",
+    "type": "sync",
+    "label": "Paper smoker waits signal",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 52
+  },
+  {
+    "id": "smoking_paper_wait_after",
+    "type": "sync",
+    "label": "Paper smoker received ingredients",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 55
+  },
+  {
+    "id": "smoking_paper_smoke",
+    "type": "action",
+    "label": "Paper smoker smokes",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 58
+  },
+  {
+    "id": "smoking_paper_post_agent_before",
+    "type": "sync",
+    "label": "Paper smoker posts agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 62
+  },
+  {
+    "id": "smoking_paper_post_agent_after",
+    "type": "sync",
+    "label": "Paper smoker posted agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 65
+  },
+  {
+    "id": "smoking_paper_exit",
+    "type": "thread",
+    "label": "Paper smoker exits",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 69
+  },
+  {
+    "id": "smoking_match_wait_before",
+    "type": "sync",
+    "label": "Match smoker waits signal",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 80
+  },
+  {
+    "id": "smoking_match_wait_after",
+    "type": "sync",
+    "label": "Match smoker received ingredients",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 83
+  },
+  {
+    "id": "smoking_match_smoke",
+    "type": "action",
+    "label": "Match smoker smokes",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 86
+  },
+  {
+    "id": "smoking_match_post_agent_before",
+    "type": "sync",
+    "label": "Match smoker posts agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 90
+  },
+  {
+    "id": "smoking_match_post_agent_after",
+    "type": "sync",
+    "label": "Match smoker posted agent semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 93
+  },
+  {
+    "id": "smoking_match_exit",
+    "type": "thread",
+    "label": "Match smoker exits",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 97
+  },
+  {
+    "id": "smoking_agent_put_paper_match",
+    "type": "action",
+    "label": "Agent puts paper+match",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 110
+  },
+  {
+    "id": "smoking_agent_post_tobacco_before",
+    "type": "sync",
+    "label": "Agent posts tobacco smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 112
+  },
+  {
+    "id": "smoking_agent_post_tobacco_after",
+    "type": "sync",
+    "label": "Agent posted tobacco smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 115
+  },
+  {
+    "id": "smoking_agent_put_tobacco_match",
+    "type": "action",
+    "label": "Agent puts tobacco+match",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 118
+  },
+  {
+    "id": "smoking_agent_post_paper_before",
+    "type": "sync",
+    "label": "Agent posts paper smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 120
+  },
+  {
+    "id": "smoking_agent_post_paper_after",
+    "type": "sync",
+    "label": "Agent posted paper smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 123
+  },
+  {
+    "id": "smoking_agent_put_tobacco_paper",
+    "type": "action",
+    "label": "Agent puts tobacco+paper",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 126
+  },
+  {
+    "id": "smoking_agent_post_match_before",
+    "type": "sync",
+    "label": "Agent posts match smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 128
+  },
+  {
+    "id": "smoking_agent_post_match_after",
+    "type": "sync",
+    "label": "Agent posted match smoker semaphore",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 131
+  },
+  {
+    "id": "smoking_agent_wait_done_before",
+    "type": "sync",
+    "label": "Agent waits smoker done",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 135
+  },
+  {
+    "id": "smoking_agent_wait_done_after",
+    "type": "sync",
+    "label": "Agent observed smoker done",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 138
+  },
+  {
+    "id": "smoking_agent_exit",
+    "type": "thread",
+    "label": "Agent thread exits",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 142
+  },
+  {
+    "id": "smoking_start",
+    "type": "thread",
+    "label": "Smoking problem starts",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 149
+  },
+  {
+    "id": "smoking_create_thread_agent",
+    "type": "thread",
+    "label": "Create agent thread",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 163
+  },
+  {
+    "id": "smoking_create_thread_tobacco",
+    "type": "thread",
+    "label": "Create tobacco smoker thread",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 167
+  },
+  {
+    "id": "smoking_create_thread_paper",
+    "type": "thread",
+    "label": "Create paper smoker thread",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 171
+  },
+  {
+    "id": "smoking_create_thread_match",
+    "type": "thread",
+    "label": "Create match smoker thread",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 175
+  },
+  {
+    "id": "smoking_end",
+    "type": "thread",
+    "label": "Smoking problem finished",
+    "file": "src/littleBookOfSemaphores/common/smoking.c",
+    "line": 189
+  }
+]
