@@ -1,0 +1,42 @@
+[
+  {
+    "name": "deadlock",
+    "trace": "deadlock/trace.jsonl",
+    "nodes": "deadlock/nodes.json"
+  },
+  {
+    "name": "dining",
+    "trace": "dining/trace.jsonl",
+    "nodes": "dining/nodes.json"
+  },
+  {
+    "name": "multiplex",
+    "trace": "multiplex/trace.jsonl",
+    "nodes": "multiplex/nodes.json"
+  },
+  {
+    "name": "mutex",
+    "trace": "mutex/trace.jsonl",
+    "nodes": "mutex/nodes.json"
+  },
+  {
+    "name": "producer_consumer",
+    "trace": "producer_consumer/trace.jsonl",
+    "nodes": "producer_consumer/nodes.json"
+  },
+  {
+    "name": "rendezvous",
+    "trace": "rendezvous/trace.jsonl",
+    "nodes": "rendezvous/nodes.json"
+  },
+  {
+    "name": "smoking",
+    "trace": "smoking/trace.jsonl",
+    "nodes": "smoking/nodes.json"
+  },
+  {
+    "name": "starvation",
+    "trace": "starvation/trace.jsonl",
+    "nodes": "starvation/nodes.json"
+  }
+]
