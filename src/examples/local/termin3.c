@@ -1,5 +1,5 @@
 //SEMAPHORES in C
-#include "termin3.h"
+#include "examples/local/termin3.h"
 #include <pthread.h>
 #include <time.h>
 #include <stdio.h>

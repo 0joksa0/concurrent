@@ -10,7 +10,7 @@ enable_testing()
 add_executable(concurrent src/main.c)
 target_include_directories(concurrent PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB EXTRA_SOURCES "src/*.c" "src/*/*.c")
+file(GLOB_RECURSE EXTRA_SOURCES "src/*.c")
 list(REMOVE_ITEM EXTRA_SOURCES "${CMAKE_SOURCE_DIR}/src/main.c")
 target_sources(concurrent PRIVATE ${EXTRA_SOURCES})
 
@@ -50,3 +50,13 @@ install(TARGETS concurrent
 install(DIRECTORY include/
         DESTINATION include
         FILES_MATCHING PATTERN "*.h")
+
+find_package(Python3 COMPONENTS Interpreter)
+if(Python3_Interpreter_FOUND)
+    add_custom_target(viz_nodes
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/scripts/extract_viz_nodes.py
+                --root ${CMAKE_SOURCE_DIR}
+                --output ${CMAKE_SOURCE_DIR}/nodes.json
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Extracting @viz-node annotations into nodes.json")
+endif()

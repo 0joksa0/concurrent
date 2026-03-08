@@ -1,4 +1,4 @@
-#include "termin1.h"
+#include "examples/local/termin1.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -13,6 +13,14 @@ Available Options:
                       Any arguments after this will be passed to the program.
                       Example: ./build --run --flag1 value
 
+  --viz [args]        Build, run executable, extract nodes.json via Python script,
+                      and refresh frontend sample files if present.
+                      Any args after --viz are passed to the executable.
+                      Example: ./build --viz
+
+  --viz-all           Build and generate trace+nodes artifacts for all scenarios
+                      into tools/vizualize/public/scenarios.
+
   --install           Build (if needed) and run 'cmake --install'.
   --prefix DIR        Specify installation prefix (default: /usr/local).
                       Must be used together with --install.
@@ -37,6 +45,7 @@ Examples:
   ./build --clean --test
   ./build --release --install --prefix /opt/myapp
   ./build --run arg1 arg2
+  ./build --viz-all
   ./build --test --cov
 
 EOF
@@ -44,6 +53,8 @@ EOF
 
 build_type="Debug"
 run=0
+viz=0
+viz_all=0
 install=0
 clean=0
 coverage=0
@@ -58,6 +69,16 @@ while [[ $# -gt 0 ]]; do
         shift
         run_args=("$@")
         break
+        ;;
+    --viz)
+        viz=1
+        run=1
+        shift
+        run_args=("$@")
+        break
+        ;;
+    --viz-all)
+        viz_all=1
         ;;
     --install)
         install=1
@@ -117,12 +138,10 @@ cmake_extra=""
 ((test)) && cmake_extra="$cmake_extra -DBUILD_TESTS=ON"
 ((coverage)) && cmake_extra="$cmake_extra -DCOVERAGE=ON"
 
-if [[ ! -f "$build_dir/CMakeCache.txt" ]]; then
-    cmake -B "$build_dir" -G "$generator" \
-        -DCMAKE_BUILD_TYPE="$build_type" \
-        ${cmake_extra} \
-        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-fi
+cmake -B "$build_dir" -G "$generator" \
+    -DCMAKE_BUILD_TYPE="$build_type" \
+    ${cmake_extra} \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 cmake --build "$build_dir"
 
 if ((install)); then
@@ -136,7 +155,28 @@ if ((run)); then
         echo "Cannot find executable '$exe_name' in $build_dir"
         exit 1
     fi
-    exec "$exe_path" "${run_args[@]}"
+    "$exe_path" "${run_args[@]}"
+fi
+
+if ((viz)); then
+    python3 scripts/extract_viz_nodes.py --root . --output nodes.json
+    if [[ -d "tools/vizualize/public/sample" ]]; then
+        cp nodes.json tools/vizualize/public/sample/nodes.json
+        if [[ -f trace.jsonl ]]; then
+            cp trace.jsonl tools/vizualize/public/sample/trace.jsonl
+        fi
+    fi
+    echo "Visualization artifacts refreshed: trace.jsonl + nodes.json"
+fi
+
+if ((viz_all)); then
+    exe_path="$build_dir/$exe_name"
+    [[ -x "$exe_path" ]] || exe_path=$(find "$build_dir" -maxdepth 2 -type f -perm -111 -name "$exe_name" | head -n1)
+    if [[ -z "$exe_path" ]]; then
+        echo "Cannot find executable '$exe_name' in $build_dir"
+        exit 1
+    fi
+    scripts/generate_viz_scenarios.sh "$exe_path"
 fi
 
 if ((test)); then

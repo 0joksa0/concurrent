@@ -1,5 +1,6 @@
 
-#include "littleBookOfSemaphores/multiplex.h"
+#include "littleBookOfSemaphores/basic/multiplex.h"
+#include "viz.h"
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
@@ -13,12 +14,21 @@
 static void* worker(void* arg)
 {
     sem_t* multiplex = (sem_t*)arg;
+    viz_thread_register("multiplex-worker");
+    // @viz-node id=multiplex_wait_before type=sync label="Worker waits on multiplex semaphore"
+    VIZ("multiplex_wait_before");
     sem_wait(multiplex);
+    // @viz-node id=multiplex_wait_after type=sync label="Worker entered critical section"
+    VIZ("multiplex_wait_after");
     printf("%lu entered critial session\n", pthread_self());
     usleep(10 + (rand() % 990));
 
     printf("%lu exit critial session\n", pthread_self());
+    // @viz-node id=multiplex_post_before type=sync label="Worker releases multiplex semaphore"
+    VIZ("multiplex_post_before");
     sem_post(multiplex);
+    // @viz-node id=multiplex_post_after type=sync label="Worker released multiplex semaphore"
+    VIZ("multiplex_post_after");
 
     return NULL;
 }
