@@ -50,6 +50,16 @@ body {
   font-size: 0.85rem;
 }
 
+.nav-link {
+  text-decoration: none;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 6px 9px;
+  color: #0f172a;
+  background: #fff;
+  font-size: 0.82rem;
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;

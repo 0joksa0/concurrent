@@ -1,0 +1,56 @@
+[
+  {
+    "key": "1.1",
+    "name": "1.1 Nedelja 1: Šta je konkurentnost",
+    "path": "theory/1.1-sta-je-konkurentnost.json",
+    "order": 11
+  },
+  {
+    "key": "1.2",
+    "name": "1.2 Nedelja 1: Konkurentnost, paralelizam i time-sharing",
+    "path": "theory/1.2-konkurentnost-paralelizam-time-sharing.json",
+    "order": 12
+  },
+  {
+    "key": "1.3",
+    "name": "1.3 Nedelja 1: Proces i nit",
+    "path": "theory/1.3-proces-i-nit.json",
+    "order": 13
+  },
+  {
+    "key": "1.4",
+    "name": "1.4 Nedelja 1: Deljeno stanje i sinhronizacija",
+    "path": "theory/1.4-deljeno-stanje-sinhronizacija.json",
+    "order": 14
+  },
+  {
+    "key": "1.5",
+    "name": "1.5 Nedelja 1: Scheduler i interleaving",
+    "path": "theory/1.5-scheduler-i-interleaving.json",
+    "order": 15
+  },
+  {
+    "key": "1.6",
+    "name": "1.6 Nedelja 1: Context switch i overhead",
+    "path": "theory/1.6-context-switch-i-overhead.json",
+    "order": 16
+  },
+  {
+    "key": "1.7",
+    "name": "1.7 Nedelja 1: Flynn i MIMD",
+    "path": "theory/1.7-flynn-i-mimd.json",
+    "order": 17
+  },
+  {
+    "key": "1.8",
+    "name": "1.8 Nedelja 1: Jako i slabo spregnuti sistemi",
+    "path": "theory/1.8-spregnuti-sistemi.json",
+    "order": 18
+  },
+  {
+    "key": "1.9",
+    "name": "1.9 Nedelja 1: Celina osnovnih koncepata",
+    "path": "theory/mindmap-osnovni-koncepti.json",
+    "order": 19
+  }
+]

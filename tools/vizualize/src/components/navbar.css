@@ -1,0 +1,35 @@
+.app-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #cbd5e1;
+  background: linear-gradient(90deg, #e2e8f0 0%, #f8fafc 100%);
+}
+
+.brand {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  text-decoration: none;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: #0f172a;
+  background: #ffffff;
+  font-size: 0.84rem;
+}
+
+.nav-link.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}

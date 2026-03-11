@@ -1,8 +1,15 @@
-# Concurrent Trace Viewer (Vite + Cytoscape)
+# Concurrent Viz (React SPA)
 
-Frontend alat za lokalnu vizuelizaciju izvršavanja događaja iz postojećeg C projekta.
+Frontend alat za lokalnu vizuelizaciju trace izvršavanja i theory mind mapa.
 
 Lokacija: `tools/vizualize`
+
+## Stack
+
+- React 18
+- React Router (`HashRouter`)
+- Cytoscape.js
+- Vite
 
 ## Instalacija
 
@@ -11,11 +18,16 @@ cd tools/vizualize
 npm install
 ```
 
-## Pokretanje (dev)
+## Pokretanje
 
 ```bash
 npm run dev
 ```
+
+Aplikacija je single-page (`index.html`) i koristi rute:
+
+- `#/` - Trace Viewer
+- `#/theory` - Theory Mind Maps
 
 ## Build
 
@@ -24,83 +36,53 @@ npm run build
 npm run preview
 ```
 
-## Učitavanje podataka
+## Struktura projekta
 
-Viewer podržava:
+- `src/app/App.jsx` - glavni router layout
+- `src/components/Navbar.jsx` - globalna navigacija
+- `src/pages/TracePage.jsx` - trace UI (čisti React state)
+- `src/pages/TheoryPage.jsx` - theory UI (čisti React state)
+- `src/features/trace/*` - model/loaders/graph helperi
+- `src/features/theory/theory.css` - theory stilovi
+- `src/features/trace/styles.css` - trace stilovi
 
-1. `Load Sample`:
-- učitava `public/sample/nodes.json`
-- učitava `public/sample/trace.jsonl`
+## Theory mape
 
-2. `Load Files`:
-- ručni upload lokalnih `nodes.json` i `trace.jsonl`
+Mape se učitavaju iz manifesta:
 
-## Novi execution-aware model
+- `public/theory/index.json`
 
-Glavni graf je **trace-driven**:
+Svaka stavka manifesta sadrži:
 
-- prikazuje samo checkpoint node-ove koji se zaista pojavljuju u trace-u
-- node-ovi iz `nodes.json` koji nisu viđeni u trace-u se ne prikazuju u glavnom grafu
-- jedan code čvor predstavlja kombinaciju: `thread + function + node_id`
+- `key`
+- `name`
+- `path`
+- `order`
 
-## Prikaz
+## Dodavanje nove mape
 
-Graf sadrži 4 nivoa:
+Automatski kreiranje fajla + upis u manifest:
 
-1. **Thread lanes** (compound čvorovi)  
-2. **Function containers** unutar lane-a  
-3. **Code cards** (checkpoint kartice) unutar funkcija  
-4. **State/resource čvorove** u posebnoj regiji
+```bash
+npm run theory:new -- 1.10 "Nedelja 1: Nova tema"
+```
 
-Code card prikazuje:
+Skripta:
 
-- label/id
-- function
-- file:line
-- snippet (ako je dostupan ili fallback)
-- type badge (`[type]`)
+- `scripts/new-theory-map.mjs`
 
-## Edge tipovi
+## Interakcije
 
-- `control_flow`: između code kartica u istoj `thread+function` grupi
-- state/resource relacije iz heuristike:
-  - `waits_on`
-  - `posts`
-  - `locks`
-  - `unlocks`
-  - `reads`
-  - `writes`
-  - fallback `state_access`
+Theory:
 
-## Replay
+- klik na čvor: detalji pojma
+- dupli klik na čvor sa `drilldown_map`: otvara detaljniju mapu
+- klik na strelicu: prikaz objašnjenja veze
+- `Export PNG` i `Export JSON`
 
-Kontrole:
+Trace:
 
-- `Play`, `Pause`, `Next`, `Prev`, `Restart`
-- brzina: `0.5x`, `1x`, `2x`, `4x`
-- view mode: `Simple (Compressed)` / `Detailed`
-- timeline slider (scrub)
-- `Auto next same thread` opcija
-
-`Simple (Compressed)` agregira iste `function + node_id` korake kroz više niti u jedinstvene code kartice, uz prikaz učesnika niti i manje state ivica.
-
-Kad je event aktivan:
-
-- highlight code card
-- highlight thread lane
-- highlight povezane resource čvorove
-- info panel prikazuje thread/function/node, lokaciju i snippet
-
-## Snippet/source
-
-Viewer pokušava da učita source liniju za `file:line`:
-
-- prvo iz Vite dev putanje `/@fs/...` (kad je putanja apsolutna)
-- zatim kao relativan URL
-- ako to ne uspe, koristi fallback snippet iz node metadata
-
-## Ograničenja MVP verzije
-
-- heuristika za resource detekciju nije savršena
-- edge logika je lokalna po `thread+function` i ne modeluje sve moguće causal relacije
-- snippet lookup je best-effort i zavisi od dostupnosti source fajlova preko dev servera
+- replay kontrole (`Play`, `Pause`, `Next`, `Prev`, `Restart`)
+- timeline scrub
+- simple/detailed view
+- auto thread jump

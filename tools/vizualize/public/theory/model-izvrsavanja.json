@@ -1,0 +1,87 @@
+{
+  "nodes": [
+    {
+      "id": "m0",
+      "label": "Konkurentnost (model izvršavanja)",
+      "group": "osnove",
+      "summary": "Više aktivnosti napreduje u preklapanju tokom vremena, uz nedeterministički relativni redosled.",
+      "pitfalls": ["poistovećivanje sa paralelizmom"],
+      "scenarios": ["rendezvous", "producer_consumer", "multiplex"]
+    },
+    {
+      "id": "m1",
+      "label": "Sekvencijalni model",
+      "group": "osnove",
+      "summary": "Jedan tok izvršavanja, jedna linija promene stanja.",
+      "pitfalls": ["neprimenljiv za više tokova"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "m2",
+      "label": "Interleaving",
+      "group": "osnove",
+      "summary": "Koraci različitih aktivnosti se prepliću u zajedničkoj vremenskoj osi.",
+      "pitfalls": ["pretpostavka istog rasporeda pri svakom pokretanju"],
+      "scenarios": ["mutex", "rendezvous"]
+    },
+    {
+      "id": "m3",
+      "label": "Paralelizam",
+      "group": "osnove",
+      "summary": "Aktivnosti se fizički izvršavaju istovremeno na više jezgara/procesora.",
+      "pitfalls": ["fokus samo na brzinu bez korektnosti"],
+      "scenarios": ["producer_consumer"]
+    },
+    {
+      "id": "m4",
+      "label": "Multiprogramiranje",
+      "group": "sistemi",
+      "summary": "U memoriji postoji više programa i sistem deli resurse među njima.",
+      "pitfalls": ["nefer raspodela CPU vremena"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "m5",
+      "label": "Vremenska podela procesora",
+      "group": "sistemi",
+      "summary": "CPU se dodeljuje aktivnostima u kvantima vremena.",
+      "pitfalls": ["previše context switch operacija"],
+      "scenarios": ["starvation", "deadlock"]
+    },
+    {
+      "id": "m6",
+      "label": "Operativni sistem kao koordinator",
+      "group": "sistemi",
+      "summary": "OS upravlja procesima, nitima, scheduler-om i deljenim resursima.",
+      "pitfalls": ["zanemarivanje OS politike u dizajnu"],
+      "scenarios": ["starvation", "deadlock"]
+    },
+    {
+      "id": "m7",
+      "label": "Razlozi za konkurentnost",
+      "group": "osnove",
+      "summary": "Bolja iskorišćenost resursa, bolja organizacija sistema i odzivnost.",
+      "pitfalls": ["nepotrebno komplikovanje jednostavnih tokova"],
+      "scenarios": ["producer_consumer", "smoking"]
+    },
+    {
+      "id": "m8",
+      "label": "Istorijski razvoj",
+      "group": "sistemi",
+      "summary": "Batch -> multiprogramiranje -> time-sharing -> multicore.",
+      "pitfalls": ["gubitak konteksta zašto su mehanizmi uvedeni"],
+      "scenarios": ["rendezvous"]
+    }
+  ],
+  "edges": [
+    { "source": "m0", "target": "m1", "relation": "suprotno_od" },
+    { "source": "m0", "target": "m2", "relation": "omogucava" },
+    { "source": "m3", "target": "m0", "relation": "deo_je" },
+    { "source": "m0", "target": "m4", "relation": "podrska_za" },
+    { "source": "m4", "target": "m5", "relation": "zahteva" },
+    { "source": "m5", "target": "m6", "relation": "zahteva" },
+    { "source": "m7", "target": "m0", "relation": "uzrokuje" },
+    { "source": "m8", "target": "m4", "relation": "prosiruje" },
+    { "source": "m6", "target": "m2", "relation": "omogucava" }
+  ]
+}

@@ -1,0 +1,41 @@
+name: Deploy Frontend Subtree
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: tools/vizualize/package-lock.json
+
+      - name: Build frontend
+        working-directory: tools/vizualize
+        run: |
+          npm ci
+          npm run build
+
+      - name: Push dist subtree to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          subtree_sha="$(git subtree split --prefix=tools/vizualize/dist HEAD)"
+          git push --force origin "${subtree_sha}:gh-pages"
