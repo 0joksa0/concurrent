@@ -1,0 +1,87 @@
+{
+  "nodes": [
+    {
+      "id": "c0",
+      "label": "Osnove konkurentnosti",
+      "group": "osnove",
+      "summary": "Skup ključnih pojmova za razumevanje više tokova izvršavanja.",
+      "pitfalls": ["učenje pojmova bez međusobnih veza"],
+      "scenarios": ["rendezvous", "mutex", "producer_consumer"]
+    },
+    {
+      "id": "c1",
+      "label": "Proces vs nit",
+      "group": "osnove",
+      "summary": "Proces upravlja resursima, nit izvršava tok kontrole.",
+      "pitfalls": ["mešanje pojmova"],
+      "scenarios": ["deadlock"]
+    },
+    {
+      "id": "c2",
+      "label": "Deljeno stanje",
+      "group": "sinhronizacija",
+      "summary": "Zajednički podaci zahtevaju zaštitu i koordinaciju.",
+      "pitfalls": ["nezaštićen pristup"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "c3",
+      "label": "Kritična sekcija",
+      "group": "sinhronizacija",
+      "summary": "Mesto na kome se koristi međusobno isključivanje.",
+      "pitfalls": ["preduga blokada"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "c4",
+      "label": "Mutex i semafor",
+      "group": "sinhronizacija",
+      "summary": "Osnovni mehanizmi zaštite i signalizacije.",
+      "pitfalls": ["neispravan redosled lock/wait"],
+      "scenarios": ["rendezvous", "mutex", "producer_consumer", "smoking"]
+    },
+    {
+      "id": "c5",
+      "label": "Race condition",
+      "group": "opasnosti",
+      "summary": "Ishod zavisi od rasporeda niti.",
+      "pitfalls": ["flaky testovi"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "c6",
+      "label": "Deadlock",
+      "group": "opasnosti",
+      "summary": "Kružna blokada i gubitak napretka.",
+      "pitfalls": ["hold-and-wait"],
+      "scenarios": ["deadlock", "dining"]
+    },
+    {
+      "id": "c7",
+      "label": "Starvation",
+      "group": "opasnosti",
+      "summary": "Neke niti ne dobijaju šansu za napredak.",
+      "pitfalls": ["nepravičnost"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "c8",
+      "label": "producer consumer",
+      "group": "obrasci",
+      "summary": "Koordinacija proizvođača i potrošača kroz bafer.",
+      "pitfalls": ["signalizacija van kritične sekcije"],
+      "scenarios": ["producer_consumer"]
+    }
+  ],
+  "edges": [
+    { "source": "c0", "target": "c1", "relation": "podrska_za" },
+    { "source": "c1", "target": "c2", "relation": "zahteva" },
+    { "source": "c2", "target": "c3", "relation": "zahteva" },
+    { "source": "c4", "target": "c3", "relation": "omogucava" },
+    { "source": "c3", "target": "c5", "relation": "sprecava" },
+    { "source": "c4", "target": "c8", "relation": "podrska_za" },
+    { "source": "c8", "target": "c2", "relation": "zahteva" },
+    { "source": "c5", "target": "c6", "relation": "kompromis_sa" },
+    { "source": "c7", "target": "c6", "relation": "suprotno_od" }
+  ]
+}

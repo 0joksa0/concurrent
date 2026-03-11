@@ -1,0 +1,96 @@
+{
+  "nodes": [
+    {
+      "id": "h0",
+      "label": "Hardverska osnova konkurentnosti",
+      "group": "arhitektura",
+      "summary": "Arhitektura određuje koliko i kako aktivnosti mogu teći istovremeno.",
+      "pitfalls": ["dizajn bez uvažavanja hardverskih ograničenja"],
+      "scenarios": ["producer_consumer", "deadlock"]
+    },
+    {
+      "id": "h1",
+      "label": "Flynn klasifikacija",
+      "group": "arhitektura",
+      "summary": "Podela sistema na SISD, SIMD, MISD i MIMD.",
+      "pitfalls": ["mešanje modela podataka i instrukcija"],
+      "scenarios": ["multiplex"]
+    },
+    {
+      "id": "h2",
+      "label": "SISD",
+      "group": "arhitektura",
+      "summary": "Jedan tok instrukcija i jedan tok podataka.",
+      "pitfalls": ["nema fizičkog paralelizma"],
+      "scenarios": ["rendezvous"]
+    },
+    {
+      "id": "h3",
+      "label": "SIMD",
+      "group": "arhitektura",
+      "summary": "Ista instrukcija nad više podataka.",
+      "pitfalls": ["slabo za razgranate kontrolne tokove"],
+      "scenarios": ["multiplex"]
+    },
+    {
+      "id": "h4",
+      "label": "MIMD",
+      "group": "arhitektura",
+      "summary": "Više jezgara izvodi različite instrukcije nad različitim podacima.",
+      "pitfalls": ["složena koordinacija niti/procesa"],
+      "scenarios": ["starvation", "deadlock", "producer_consumer"]
+    },
+    {
+      "id": "h5",
+      "label": "Zajednička memorija",
+      "group": "sistemi",
+      "summary": "Više jezgara deli isti adresni prostor.",
+      "pitfalls": ["kontencija", "race condition"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "h6",
+      "label": "Razdvojena memorija",
+      "group": "sistemi",
+      "summary": "Svaki čvor ima lokalnu memoriju; koordinacija je preko poruka.",
+      "pitfalls": ["latencija mreže", "složen protokol"],
+      "scenarios": ["smoking"]
+    },
+    {
+      "id": "h7",
+      "label": "Jako spregnuti sistemi",
+      "group": "sistemi",
+      "summary": "Niska latencija komunikacije kroz deljenu memoriju.",
+      "pitfalls": ["globalna kontencija"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "h8",
+      "label": "Slabo spregnuti sistemi",
+      "group": "sistemi",
+      "summary": "Čvorovi su povezani mrežom i komuniciraju porukama.",
+      "pitfalls": ["delimični otkazi"],
+      "scenarios": ["deadlock"]
+    },
+    {
+      "id": "h9",
+      "label": "Jedinstveni pogled: hardver + OS + program",
+      "group": "osnove",
+      "summary": "Korektnost i performanse nastaju u preseku tri nivoa.",
+      "pitfalls": ["optimizacija samo jednog nivoa"],
+      "scenarios": ["producer_consumer", "starvation"]
+    }
+  ],
+  "edges": [
+    { "source": "h0", "target": "h1", "relation": "zahteva" },
+    { "source": "h1", "target": "h2", "relation": "podrska_za" },
+    { "source": "h1", "target": "h3", "relation": "podrska_za" },
+    { "source": "h1", "target": "h4", "relation": "podrska_za" },
+    { "source": "h4", "target": "h5", "relation": "podrska_za" },
+    { "source": "h4", "target": "h6", "relation": "podrska_za" },
+    { "source": "h5", "target": "h7", "relation": "deo_je" },
+    { "source": "h6", "target": "h8", "relation": "deo_je" },
+    { "source": "h7", "target": "h8", "relation": "suprotno_od" },
+    { "source": "h0", "target": "h9", "relation": "prosiruje" }
+  ]
+}

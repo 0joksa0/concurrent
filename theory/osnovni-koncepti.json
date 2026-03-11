@@ -1,0 +1,123 @@
+{
+  "nodes": [
+    {
+      "id": "o0",
+      "label": "Konkurentni sistem",
+      "group": "osnove",
+      "summary": "Sistem sa više aktivnosti koje napreduju u preklapanju.",
+      "pitfalls": ["sekvencijalna intuicija"],
+      "scenarios": ["rendezvous", "mutex", "producer_consumer", "starvation", "deadlock"]
+    },
+    {
+      "id": "o1",
+      "label": "Proces",
+      "group": "osnove",
+      "summary": "Vlasnik resursa i adresnog prostora.",
+      "pitfalls": ["previše teški izolovani tokovi"],
+      "scenarios": ["deadlock"]
+    },
+    {
+      "id": "o2",
+      "label": "Nit",
+      "group": "osnove",
+      "summary": "Jedinica izvršavanja unutar procesa.",
+      "pitfalls": ["nesigurno deljenje memorije"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "o3",
+      "label": "Deljeno stanje",
+      "group": "sinhronizacija",
+      "summary": "Memorija ili resurs dostupan više tokova.",
+      "pitfalls": ["race condition"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "o4",
+      "label": "Kritična sekcija",
+      "group": "sinhronizacija",
+      "summary": "Deo koda koji traži međusobno isključivanje.",
+      "pitfalls": ["blokiranje drugih aktivnosti"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "o5",
+      "label": "Semafor / Mutex",
+      "group": "sinhronizacija",
+      "summary": "Mehanizmi koordinacije i zaštite deljenog stanja.",
+      "pitfalls": ["deadlock zbog lošeg redosleda zaključavanja"],
+      "scenarios": ["rendezvous", "mutex", "producer_consumer", "smoking"]
+    },
+    {
+      "id": "o6",
+      "label": "Scheduler",
+      "group": "rasporedjivanje",
+      "summary": "Odlučuje ko dobija CPU i kada.",
+      "pitfalls": ["starvation"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "o7",
+      "label": "Interleaving",
+      "group": "rasporedjivanje",
+      "summary": "Preplitanje koraka aktivnosti.",
+      "pitfalls": ["više validnih ishoda"],
+      "scenarios": ["mutex", "deadlock"]
+    },
+    {
+      "id": "o8",
+      "label": "Context switch",
+      "group": "rasporedjivanje",
+      "summary": "Smena aktivne niti/procesa uz save/restore konteksta.",
+      "pitfalls": ["overhead"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "o9",
+      "label": "producer consumer",
+      "group": "obrasci",
+      "summary": "Obrazac koordinacije proizvodnje i potrošnje nad deljenim baferom.",
+      "pitfalls": ["pogrešan redosled signalizacije"],
+      "scenarios": ["producer_consumer"]
+    },
+    {
+      "id": "o10",
+      "label": "Deadlock",
+      "group": "opasnosti",
+      "summary": "Aktivnosti se međusobno blokiraju i nema napretka.",
+      "pitfalls": ["kružna zavisnost"],
+      "scenarios": ["deadlock", "dining"]
+    },
+    {
+      "id": "o11",
+      "label": "Starvation",
+      "group": "opasnosti",
+      "summary": "Jedna aktivnost ostaje bez napretka zbog nepravične dodele resursa.",
+      "pitfalls": ["reader/writer bias"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "o12",
+      "label": "Paralelizam i MIMD",
+      "group": "arhitektura",
+      "summary": "Hardverski nivo omogućava istovremen fizički rad više aktivnosti.",
+      "pitfalls": ["skaliranje bez kontrole kontencije"],
+      "scenarios": ["producer_consumer", "deadlock"]
+    }
+  ],
+  "edges": [
+    { "source": "o0", "target": "o1", "relation": "podrska_za" },
+    { "source": "o1", "target": "o2", "relation": "podrska_za" },
+    { "source": "o2", "target": "o3", "relation": "zahteva" },
+    { "source": "o3", "target": "o4", "relation": "zahteva" },
+    { "source": "o5", "target": "o4", "relation": "omogucava" },
+    { "source": "o6", "target": "o7", "relation": "omogucava" },
+    { "source": "o6", "target": "o8", "relation": "omogucava" },
+    { "source": "o7", "target": "o10", "relation": "uzrokuje" },
+    { "source": "o6", "target": "o11", "relation": "uzrokuje" },
+    { "source": "o5", "target": "o9", "relation": "podrska_za" },
+    { "source": "o9", "target": "o3", "relation": "zahteva" },
+    { "source": "o12", "target": "o0", "relation": "prosiruje" },
+    { "source": "o10", "target": "o11", "relation": "suprotno_od" }
+  ]
+}
