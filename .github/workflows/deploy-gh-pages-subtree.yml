@@ -37,5 +37,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Create a CI-only commit so subtree split includes freshly built files.
+          git add -f tools/vizualize/dist
+          git commit --allow-empty -m "ci: build frontend dist for gh-pages"
+
           subtree_sha="$(git subtree split --prefix=tools/vizualize/dist HEAD)"
           git push --force origin "${subtree_sha}:gh-pages"
