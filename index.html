@@ -3,79 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Concurrent Trace Viewer</title>
-    <script type="module" crossorigin src="./assets/index-BiIoqCXQ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DW6VKWyF.css">
+    <title>Concurrent Viz</title>
+    <script type="module" crossorigin src="./assets/index-ByGJQg4T.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BHHQrrfu.css">
   </head>
   <body>
-    <div id="app">
-      <header class="topbar">
-        <h1>Concurrent Trace Viewer</h1>
-        <div class="file-loaders">
-          <label for="scenarioSelect">Scenario</label>
-          <select id="scenarioSelect">
-            <option value="">Loading...</option>
-          </select>
-          <label>nodes.json <input id="nodesFile" type="file" accept=".json,application/json" /></label>
-          <label>trace.jsonl <input id="traceFile" type="file" accept=".jsonl,.txt,application/json" /></label>
-          <button id="loadFilesBtn">Load Files</button>
-        </div>
-      </header>
-
-      <main class="layout">
-        <section class="graph-wrap">
-          <div id="cy"></div>
-        </section>
-
-        <aside class="sidepanel">
-          <section class="controls">
-            <h2>Replay</h2>
-            <div class="buttons">
-              <button id="restartBtn">Restart</button>
-              <button id="prevBtn">Prev</button>
-              <button id="playBtn">Play</button>
-              <button id="pauseBtn">Pause</button>
-              <button id="nextBtn">Next</button>
-            </div>
-            <label for="speedSelect">Speed</label>
-            <select id="speedSelect">
-              <option value="0.5">0.5x</option>
-              <option value="1" selected>1x</option>
-              <option value="2">2x</option>
-              <option value="4">4x</option>
-            </select>
-            <label for="viewMode">View mode</label>
-            <select id="viewMode">
-              <option value="simple" selected>Simple (Compressed)</option>
-              <option value="detailed">Detailed</option>
-            </select>
-            <label class="checkline">
-              <input id="autoThreadJump" type="checkbox" />
-              Auto next same thread
-            </label>
-            <label class="checkline">
-              <input id="showResourcesSimple" type="checkbox" />
-              Show resources in simple mode
-            </label>
-            <label for="timelineRange">Timeline</label>
-            <input id="timelineRange" type="range" min="0" max="0" value="0" step="1" />
-            <div id="timelineLabel" class="muted">0 / 0</div>
-          </section>
-
-          <section class="event-panel">
-            <h2>Current Event</h2>
-            <div id="eventInfo" class="event-info">No event loaded.</div>
-          </section>
-
-          <section class="legend-panel">
-            <h2>Node Type Legend</h2>
-            <ul id="typeLegend"></ul>
-            <h2>Thread Colors</h2>
-            <ul id="threadLegend"></ul>
-          </section>
-        </aside>
-      </main>
-    </div>
-
+    <div id="root"></div>
   </body>
 </html>
