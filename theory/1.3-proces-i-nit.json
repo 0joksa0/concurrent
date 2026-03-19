@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "w21-0",
+      "label": "Proces",
+      "group": "osnove",
+      "summary": "Izvršna instanca programa sa resursima i kontekstom.",
+      "explanation": "Proces uključuje adresni prostor, otvorene resurse i podatke koje OS koristi da bi kontrolisao izvršavanje. Proces je pre svega jedinica vlasništva nad resursima.",
+      "pitfalls": [
+        "tretiranje procesa kao samog toka izvršavanja"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w21-1",
+      "label": "Nit",
+      "group": "osnove",
+      "summary": "Minimalna jedinica procesorskog izvršavanja.",
+      "explanation": "Nit ima sopstveni tok kontrole i kontekst, ali radi unutar procesa i koristi njegove zajedničke resurse. Jedan proces može imati jednu ili više niti.",
+      "pitfalls": [
+        "zanemarivanje lokalnog konteksta niti"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w21-2",
+      "label": "Single-threaded proces",
+      "group": "osnove",
+      "summary": "Jedan proces, jedna nit, jedan tok izvršavanja.",
+      "explanation": "U klasičnom modelu proces ima jedan PC, jedan set registara i jedan aktivni stek. Kontekst je jednostavniji, ali nema internog paralelizma.",
+      "pitfalls": [
+        "blokiranje celog procesa pri čekanju I/O"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w21-3",
+      "label": "Višenitni proces",
+      "group": "osnove",
+      "summary": "Više niti dele isto procesno okruženje.",
+      "explanation": "Kod višenitnog procesa niti dele kod, globalne podatke i heap, ali svaka ima sopstveni stek i izvršno stanje. To povećava fleksibilnost i složenost korektnosti.",
+      "pitfalls": [
+        "nekontrolisano deljenje podataka"
+      ],
+      "scenarios": [
+        "producer_consumer"
+      ]
+    },
+    {
+      "id": "w21-4",
+      "label": "Vlasništvo resursa vs izvršavanje",
+      "group": "sistemi",
+      "summary": "Proces = resursi, nit = tok kontrole.",
+      "explanation": "Ključna ideja je razdvajanje odgovornosti: proces obezbeđuje okruženje i resurse, a nit predstavlja konkretan tok koji koristi to okruženje.",
+      "pitfalls": [
+        "mešanje nivoa apstrakcije"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w21-5",
+      "label": "Stanja procesa/niti",
+      "group": "rasporedjivanje",
+      "summary": "ready, running, blocked i prelazi između njih.",
+      "explanation": "OS menja stanje aktivnosti u zavisnosti od događaja: dodela CPU, blokiranje na I/O ili sinhronizaciju i povratak u ready red. Ovo je osnova za scheduling.",
+      "pitfalls": [
+        "zanemarivanje blocked stanja u analizi"
+      ],
+      "scenarios": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "w21-0",
+      "target": "w21-1",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w21-0",
+      "target": "w21-2",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w21-0",
+      "target": "w21-3",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w21-0",
+      "target": "w21-4",
+      "relation": "omogucava"
+    },
+    {
+      "source": "w21-1",
+      "target": "w21-5",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w21-3",
+      "target": "w21-4",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

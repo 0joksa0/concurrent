@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "w11-0",
+      "label": "Konkurentnost",
+      "group": "osnove",
+      "summary": "Više aktivnosti napreduje u preklapanju tokom vremena.",
+      "explanation": "Konkurentnost je model organizacije izvršavanja u kome postoji više logički nezavisnih tokova rada. Redosled njihovih koraka nije potpuno fiksiran programskim tekstom, već zavisi i od sistema koji raspoređuje izvršavanje.",
+      "pitfalls": [
+        "poistovećivanje sa paralelizmom"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w11-1",
+      "label": "Sekvencijalni program",
+      "group": "osnove",
+      "summary": "Jedan tok izvršavanja i jedna osnovna linija promene stanja.",
+      "explanation": "Kod sekvencijalnog modela svaka naredna operacija dolazi nakon prethodne u jednoj putanji. Zato je analiza stanja jednostavnija, ali model nije dovoljan za sisteme sa više nezavisnih aktivnosti.",
+      "pitfalls": [
+        "primena sekvencijalne intuicije na konkurentan kod"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w11-2",
+      "label": "Više tokova izvršavanja",
+      "group": "osnove",
+      "summary": "Procesi i niti koji napreduju nezavisno, ali koordinisano.",
+      "explanation": "U konkurentnom programu svaki tok može čekati, blokirati se ili napredovati različitom brzinom. Program mora biti ispravan za više mogućih rasporeda tih tokova.",
+      "pitfalls": [
+        "pretpostavka fiksnog redosleda između tokova"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w11-3",
+      "label": "Nedeterministički redosled",
+      "group": "opasnosti",
+      "summary": "Relativni redosled koraka nije unapred potpuno određen.",
+      "explanation": "Dve niti mogu imati isti unutrašnji redosled svojih instrukcija, ali međusobni raspored tih instrukcija može biti različit u svakom pokretanju. Zbog toga je potrebno razmišljati o skupu mogućih izvršavanja.",
+      "pitfalls": [
+        "testiranje samo jednog rasporeda"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w11-4",
+      "label": "Deljenje resursa",
+      "group": "sistemi",
+      "summary": "Više aktivnosti koristi CPU, memoriju i I/O uređaje.",
+      "explanation": "U praksi konkurentnost postoji jer aktivnosti dele ograničene resurse. Ako jedna aktivnost čeka I/O, sistem može dati CPU drugoj aktivnosti i tako poboljšati iskorišćenje.",
+      "pitfalls": [
+        "kontencija bez politike pristupa"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w11-5",
+      "label": "Koordinacija aktivnosti",
+      "group": "sinhronizacija",
+      "summary": "Pravila i mehanizmi koji uvode red u preplitanje tokova.",
+      "explanation": "Sama konkurentnost ne garantuje korektnost. Potrebni su mehanizmi sinhronizacije koji eksplicitno regulišu kada je aktivnost dozvoljena, a kada mora da čeka.",
+      "pitfalls": [
+        "oslanjanje na srećan raspored"
+      ],
+      "scenarios": [
+        "rendezvous"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "w11-0",
+      "target": "w11-1",
+      "relation": "razlikuje_se_od"
+    },
+    {
+      "source": "w11-0",
+      "target": "w11-2",
+      "relation": "omogucava"
+    },
+    {
+      "source": "w11-2",
+      "target": "w11-3",
+      "relation": "moze_dovesti_do"
+    },
+    {
+      "source": "w11-0",
+      "target": "w11-4",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w11-2",
+      "target": "w11-5",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w11-0",
+      "target": "w11-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

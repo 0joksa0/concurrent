@@ -1,0 +1,120 @@
+{
+  "nodes": [
+    {
+      "id": "w42-0",
+      "label": "MIMD organizacija memorije",
+      "group": "arhitektura",
+      "summary": "Dve glavne varijante: zajednička i razdvojena memorija.",
+      "explanation": "Nakon razumevanja MIMD modela, sledeći korak je organizacija memorije. Ona direktno određuje stil komunikacije i vrste problema u konkurentnom programu.",
+      "pitfalls": [
+        "zanemarivanje komunikacionog modela"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.7",
+      "drilldown_label": "1.7 Flynn i MIMD"
+    },
+    {
+      "id": "w42-1",
+      "label": "Zajednička memorija",
+      "group": "sistemi",
+      "summary": "Više jezgara pristupa istom adresnom prostoru.",
+      "explanation": "Ovaj model je intuitivan za niti jer podaci deluju lokalno dostupno. Istovremeno uvodi snažnu potrebu za zaštitom deljenog stanja.",
+      "pitfalls": [
+        "race condition",
+        "kontencija memorije"
+      ],
+      "scenarios": [
+        "mutex",
+        "producer_consumer"
+      ]
+    },
+    {
+      "id": "w42-2",
+      "label": "Razdvojena memorija",
+      "group": "sistemi",
+      "summary": "Svaki čvor ima lokalnu memoriju i komunicira porukama.",
+      "explanation": "U ovom modelu deljenje podataka nije implicitno. Saradnja ide kroz eksplicitnu razmenu poruka, što smanjuje direktne race konflikte ali povećava komunikacionu složenost.",
+      "pitfalls": [
+        "latencija mreže"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w42-3",
+      "label": "Jako spregnuti sistemi",
+      "group": "sistemi",
+      "summary": "Nisko-latentna saradnja kroz deljeni prostor.",
+      "explanation": "Jaka sprega tipično znači bliži hardverski odnos i bržu razmenu, ali i veći rizik kontencije na istim memorijskim lokacijama.",
+      "pitfalls": [
+        "globalna kontencija"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w42-4",
+      "label": "Slabo spregnuti sistemi",
+      "group": "sistemi",
+      "summary": "Čvorovi sarađuju preko mreže i protokola.",
+      "explanation": "Slaba sprega bolje skalira geografski i organizaciono, ali uvodi nove probleme: latenciju, parcijalne otkaze i potrebu za robusnim protokolima.",
+      "pitfalls": [
+        "nedeterministička mrežna kašnjenja"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w42-5",
+      "label": "Shared memory vs message passing",
+      "group": "osnove",
+      "summary": "Dve velike paradigme konkurentnog programiranja.",
+      "explanation": "U shared-memory modelu glavni problem je zaštita deljenog stanja. U message-passing modelu glavni problem je semantika razmene poruka i tolerancija otkaza.",
+      "pitfalls": [
+        "pogrešan izbor paradigme za problem"
+      ],
+      "scenarios": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "w42-0",
+      "target": "w42-1",
+      "relation": "primena_u_kontekstu",
+      "relation_label": "grana modela",
+      "explanation": "MIMD sa zajedničkom memorijom je jedna od glavnih organizacionih varijanti."
+    },
+    {
+      "source": "w42-0",
+      "target": "w42-2",
+      "relation": "primena_u_kontekstu",
+      "relation_label": "grana modela",
+      "explanation": "MIMD sa razdvojenom memorijom je druga glavna varijanta organizacije."
+    },
+    {
+      "source": "w42-1",
+      "target": "w42-3",
+      "relation": "pripada_kategoriji",
+      "relation_label": "tipično pripada",
+      "explanation": "Zajednička memorija je tipična za jako spregnute sisteme sa niskom latencijom."
+    },
+    {
+      "source": "w42-2",
+      "target": "w42-4",
+      "relation": "pripada_kategoriji",
+      "relation_label": "tipično pripada",
+      "explanation": "Razdvojena memorija je tipična za slabo spregnute sisteme povezane mrežom."
+    },
+    {
+      "source": "w42-3",
+      "target": "w42-4",
+      "relation": "razlikuje_se_od",
+      "relation_label": "kontrast",
+      "explanation": "Jako i slabo spregnuti sistemi imaju različite troškove, stil komunikacije i rizike."
+    },
+    {
+      "source": "w42-0",
+      "target": "w42-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Iz izbora memorijskog modela prirodno sledi izbor programske paradigme: shared memory ili message passing."
+    }
+  ]
+}

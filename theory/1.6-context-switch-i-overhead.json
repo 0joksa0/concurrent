@@ -1,0 +1,98 @@
+{
+  "nodes": [
+    {
+      "id": "w32-0",
+      "label": "Context switch",
+      "group": "rasporedjivanje",
+      "summary": "Čuvanje i obnavljanje konteksta pri smeni aktivnosti.",
+      "explanation": "Kada CPU prelazi sa jedne aktivnosti na drugu, OS mora sačuvati registre, programski brojač i ostale podatke stare aktivnosti, pa učitati stanje nove aktivnosti.",
+      "pitfalls": [
+        "pretpostavka da je context switch besplatan"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w32-1",
+      "label": "Sačuvani kontekst",
+      "group": "rasporedjivanje",
+      "summary": "PC, registri, stack pointer i pomoćne informacije.",
+      "explanation": "Bez pravilnog čuvanja konteksta ne postoji kontinuitet izvršavanja. Aktivnost mora moći da nastavi tačno od tačke prekida.",
+      "pitfalls": [
+        "nepotpun restore stanja"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w32-2",
+      "label": "Overhead",
+      "group": "opasnosti",
+      "summary": "Context switch troši CPU vreme koje ne radi korisni posao.",
+      "explanation": "Svaka smena aktivnosti ima cenu: kernel rad, save/restore, potencijalni cache promašaji. Previše smena može umanjiti ukupne performanse.",
+      "pitfalls": [
+        "previše sitnih niti"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w32-3",
+      "label": "Cache efekti",
+      "group": "opasnosti",
+      "summary": "Promena aktivnosti često narušava lokalnost podataka i instrukcija.",
+      "explanation": "Nova aktivnost koristi drugačiji skup podataka/instrukcija, pa prethodno učitane cache linije gube vrednost. Ovo je čest skriveni trošak konkurentnosti.",
+      "pitfalls": [
+        "potcenjen memory overhead"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w32-4",
+      "label": "Balans niti",
+      "group": "rasporedjivanje",
+      "summary": "Broj niti treba uskladiti sa ciljem i hardverom.",
+      "explanation": "Više niti ne znači automatski bolje performanse. Potrebno je balansirati odzivnost, paralelizam i cenu upravljanja izvršavanjem.",
+      "pitfalls": [
+        "oversubscription"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w32-5",
+      "label": "Korektnost pre performansi",
+      "group": "osnove",
+      "summary": "Prvo garantovati ispravno ponašanje, zatim optimizovati.",
+      "explanation": "Konkurentni sistemi prvo moraju biti korektni za sve rasporede izvršavanja, a tek onda se optimizuju kvanti, broj niti i arhitekturalni parametri.",
+      "pitfalls": [
+        "preuranjena optimizacija"
+      ],
+      "scenarios": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "w32-0",
+      "target": "w32-1",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w32-0",
+      "target": "w32-2",
+      "relation": "moze_dovesti_do"
+    },
+    {
+      "source": "w32-2",
+      "target": "w32-3",
+      "relation": "moze_dovesti_do"
+    },
+    {
+      "source": "w32-4",
+      "target": "w32-2",
+      "relation": "sprecava"
+    },
+    {
+      "source": "w32-0",
+      "target": "w32-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "nodes": [
+    {
+      "id": "w22-0",
+      "label": "Deljeno stanje",
+      "group": "sinhronizacija",
+      "summary": "Memorija/resurs dostupni više niti.",
+      "explanation": "Kada više niti ima pristup istim podacima i barem jedna nit menja te podatke, redosled operacija postaje ključan za ispravan rezultat.",
+      "pitfalls": [
+        "upis bez zaštite"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w22-1",
+      "label": "Privatno stanje niti",
+      "group": "sinhronizacija",
+      "summary": "Stek i lokalni kontekst svake niti.",
+      "explanation": "Lokalne promenljive su po pravilu privatne, osim ako se eksplicitno prosledi adresa/reference. Ova razlika je ključna za razumevanje gde nastaje konflikt pristupa.",
+      "pitfalls": [
+        "prosleđivanje adrese lokalne promenljive"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w22-2",
+      "label": "Kritična sekcija",
+      "group": "sinhronizacija",
+      "summary": "Kod koji mora biti zaštićen od konkurentnog upisa.",
+      "explanation": "Kritična sekcija obuhvata operacije nad deljenim stanjem koje moraju izgledati kao atomarne u odnosu na druge niti.",
+      "pitfalls": [
+        "preduga kritična sekcija"
+      ],
+      "scenarios": [
+        "mutex"
+      ]
+    },
+    {
+      "id": "w22-3",
+      "label": "Race condition",
+      "group": "opasnosti",
+      "summary": "Rezultat zavisi od rasporeda pristupa deljenom stanju.",
+      "explanation": "Isti kod može nekad dati tačan, a nekad pogrešan rezultat, u zavisnosti od toga kako su se niti preplele. To je suština race condition problema.",
+      "pitfalls": [
+        "teško reprodukovanje greške"
+      ],
+      "scenarios": [
+        "mutex"
+      ]
+    },
+    {
+      "id": "w22-4",
+      "label": "Mutex i semafor",
+      "group": "sinhronizacija",
+      "summary": "Osnovni mehanizmi kontrole pristupa i signalizacije.",
+      "explanation": "Mutex uvodi međusobno isključivanje. Semafor uvodi brojačku signalizaciju i koordinaciju redosleda između aktivnosti.",
+      "pitfalls": [
+        "neispravan redosled lock/wait"
+      ],
+      "scenarios": [
+        "rendezvous",
+        "mutex",
+        "producer_consumer"
+      ]
+    },
+    {
+      "id": "w22-5",
+      "label": "producer consumer",
+      "group": "obrasci",
+      "summary": "Tipičan obrazac sinhronizacije nad deljenim baferom.",
+      "explanation": "Producent i potrošač rade u različitim nitima i moraju koordinisati pristup baferu i broj slobodnih/punih mesta.",
+      "pitfalls": [
+        "pogrešan redosled signalizacije"
+      ],
+      "scenarios": [
+        "producer_consumer"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "w22-0",
+      "target": "w22-1",
+      "relation": "razlikuje_se_od"
+    },
+    {
+      "source": "w22-0",
+      "target": "w22-2",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w22-2",
+      "target": "w22-3",
+      "relation": "sprecava"
+    },
+    {
+      "source": "w22-4",
+      "target": "w22-2",
+      "relation": "omogucava"
+    },
+    {
+      "source": "w22-4",
+      "target": "w22-5",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w22-0",
+      "target": "w22-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

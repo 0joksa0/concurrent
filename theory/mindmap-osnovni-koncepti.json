@@ -1,0 +1,217 @@
+{
+  "nodes": [
+    {
+      "id": "all-0",
+      "label": "Konkurentnost: celina",
+      "group": "osnove",
+      "summary": "Jedinstven pregled svih osnovnih koncepata kursa.",
+      "explanation": "Ova mapa spaja softverski model, OS mehanizme i hardversku osnovu. Ideja je da bude ulazna tačka za brzo ponavljanje i povezivanje tema.",
+      "pitfalls": [
+        "učenje pojmova izolovano"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.1",
+      "drilldown_label": "1.1 Šta je konkurentnost"
+    },
+    {
+      "id": "all-1",
+      "label": "Proces i nit",
+      "group": "osnove",
+      "summary": "Proces kao resursni kontejner, nit kao tok izvršavanja.",
+      "explanation": "Razdvajanje procesa i niti objašnjava zašto je konkurentnost fleksibilna, ali i zašto deljeno stanje mora biti kontrolisano.",
+      "pitfalls": [
+        "mešanje uloga procesa i niti"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.3",
+      "drilldown_label": "1.3 Proces i nit"
+    },
+    {
+      "id": "all-2",
+      "label": "Deljeno stanje i kritična sekcija",
+      "group": "sinhronizacija",
+      "summary": "Centralni izvor korektnosti u thread modelu.",
+      "explanation": "Ako više niti pristupa istom stanju, kritične operacije moraju biti zaštićene. U suprotnom nastaju race uslovi i nekorektni ishodi.",
+      "pitfalls": [
+        "pisanje bez zaključavanja"
+      ],
+      "scenarios": [
+        "mutex"
+      ],
+      "drilldown_map": "1.4",
+      "drilldown_label": "1.4 Deljeno stanje i sinhronizacija"
+    },
+    {
+      "id": "all-3",
+      "label": "Mutex i semafor",
+      "group": "sinhronizacija",
+      "summary": "Osnovni mehanizmi koordinacije.",
+      "explanation": "Mutex rešava međusobno isključivanje, semafor redosled i brojanje dozvola. Njihova pravilna upotreba je osnova stabilnog konkurentnog koda.",
+      "pitfalls": [
+        "deadlock zbog redosleda zaključavanja"
+      ],
+      "scenarios": [
+        "rendezvous",
+        "producer_consumer"
+      ],
+      "drilldown_map": "1.4",
+      "drilldown_label": "1.4 Deljeno stanje i sinhronizacija"
+    },
+    {
+      "id": "all-4",
+      "label": "Scheduler i interleaving",
+      "group": "rasporedjivanje",
+      "summary": "OS određuje raspored izvršavanja koraka.",
+      "explanation": "Interleaving je posledica scheduler-a. Program mora biti ispravan za više legitimnih rasporeda, ne samo za jedan idealni tok.",
+      "pitfalls": [
+        "determinističko razmišljanje"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.5",
+      "drilldown_label": "1.5 Scheduler i interleaving"
+    },
+    {
+      "id": "all-5",
+      "label": "Context switch i overhead",
+      "group": "rasporedjivanje",
+      "summary": "Smena aktivnosti ima cenu.",
+      "explanation": "Context switch omogućava konkurentnost, ali troši vreme i cache lokalnost. Zbog toga performanse traže balans, ne maksimalan broj niti.",
+      "pitfalls": [
+        "oversubscription niti"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.6",
+      "drilldown_label": "1.6 Context switch i overhead"
+    },
+    {
+      "id": "all-6",
+      "label": "Deadlock i starvation",
+      "group": "opasnosti",
+      "summary": "Dva ključna rizika konkurentnih sistema.",
+      "explanation": "Deadlock znači potpuni zastoj zbog kružnog čekanja. Starvation znači da pojedine aktivnosti ostaju bez napretka zbog nefer raspoređivanja ili politike pristupa.",
+      "pitfalls": [
+        "neprepoznati uslovi čekanja"
+      ],
+      "scenarios": [
+        "deadlock",
+        "starvation"
+      ],
+      "drilldown_map": "1.5",
+      "drilldown_label": "1.5 Scheduler i interleaving"
+    },
+    {
+      "id": "all-7",
+      "label": "producer consumer",
+      "group": "obrasci",
+      "summary": "Primer sinhronizacije koji objedinjuje više osnovnih pojmova.",
+      "explanation": "Pattern producer consumer prirodno spaja deljeni bafer, kritične sekcije, signalizaciju i kontrolu kapaciteta. Zato je odličan primer za proveru razumevanja.",
+      "pitfalls": [
+        "pogrešan redosled signalizacije"
+      ],
+      "scenarios": [
+        "producer_consumer"
+      ],
+      "drilldown_map": "1.4",
+      "drilldown_label": "1.4 Deljeno stanje i sinhronizacija"
+    },
+    {
+      "id": "all-8",
+      "label": "Flynn, MIMD i memorijski modeli",
+      "group": "arhitektura",
+      "summary": "Hardverska osnova koja određuje stil konkurentnosti.",
+      "explanation": "Hardver određuje da li je dominantan shared-memory ili message-passing stil. Dobar dizajn usklađuje programski model sa arhitekturom i OS mehanizmima.",
+      "pitfalls": [
+        "ignorisan hardverski kontekst"
+      ],
+      "scenarios": [],
+      "drilldown_map": "1.7",
+      "drilldown_label": "1.7 Flynn i MIMD"
+    }
+  ],
+  "edges": [
+    {
+      "source": "all-0",
+      "target": "all-1",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Posle opšte definicije konkurentnosti prirodno prelazimo na osnovne izvršne jedinice: proces i nit."
+    },
+    {
+      "source": "all-1",
+      "target": "all-2",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Kada razumemo procese i niti, sledeće pitanje je šta od stanja dele i kako se to štiti."
+    },
+    {
+      "source": "all-2",
+      "target": "all-3",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Iz problema deljenog stanja direktno proizlazi potreba za mutex/semafor mehanizmima."
+    },
+    {
+      "source": "all-3",
+      "target": "all-4",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Nakon mehanizama zaštite, fokus prelazi na to kako OS raspoređuje izvršavanje tih niti."
+    },
+    {
+      "source": "all-4",
+      "target": "all-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Scheduler proizvodi smene aktivnosti, a svaka smena ima cenu kroz context switch overhead."
+    },
+    {
+      "source": "all-5",
+      "target": "all-6",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Loše upravljanje rasporedom i zaključavanjima vodi ka deadlock/starvation problemima."
+    },
+    {
+      "source": "all-2",
+      "target": "all-7",
+      "relation": "primena_u_kontekstu",
+      "relation_label": "podrška za",
+      "explanation": "producer consumer direktno zavisi od pravilnog upravljanja deljenim stanjem i kritičnim sekcijama."
+    },
+    {
+      "source": "all-3",
+      "target": "all-7",
+      "relation": "primena_u_kontekstu",
+      "relation_label": "podrška za",
+      "explanation": "producer consumer koristi semafore i mutex za koordinaciju reda i kapaciteta bafera."
+    },
+    {
+      "source": "all-4",
+      "target": "all-6",
+      "relation": "moze_dovesti_do",
+      "relation_label": "može da izazove",
+      "explanation": "Nepravična politika scheduler-a i nepovoljan interleaving mogu dovesti do starvation ponašanja."
+    },
+    {
+      "source": "all-8",
+      "target": "all-4",
+      "relation": "utice_na",
+      "relation_label": "utiče na",
+      "explanation": "Arhitektura i memorijski model utiču na scheduler odluke i ponašanje interleaving-a u praksi."
+    },
+    {
+      "source": "all-8",
+      "target": "all-5",
+      "relation": "utice_na",
+      "relation_label": "utiče na",
+      "explanation": "Memorijska hijerarhija i topologija jezgara utiču na cenu context switch-a i ukupni overhead."
+    },
+    {
+      "source": "all-0",
+      "target": "all-8",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak",
+      "explanation": "Nakon softverske slike konkurentnosti, sledeći nivo razumevanja je hardverska osnova."
+    }
+  ]
+}

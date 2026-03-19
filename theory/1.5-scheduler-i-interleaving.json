@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "w31-0",
+      "label": "Scheduler",
+      "group": "rasporedjivanje",
+      "summary": "Bira sledeću spremnu aktivnost za CPU.",
+      "explanation": "Scheduler je komponenta OS-a koja primenjuje politiku raspoređivanja. On određuje kada i koliko dugo aktivnost dobija procesor.",
+      "pitfalls": [
+        "previše pojednostavljen model raspoređivanja"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w31-1",
+      "label": "Politika raspoređivanja",
+      "group": "rasporedjivanje",
+      "summary": "Pravila: prioritet, kvant, fairness, stanje aktivnosti.",
+      "explanation": "Različite politike optimizuju različite ciljeve: odzivnost, propusnost, pravičnost ili predvidljivost. Politika direktno menja ponašanje konkurentnog sistema.",
+      "pitfalls": [
+        "jedan cilj optimizacije na štetu ostalih"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w31-2",
+      "label": "Ready queue",
+      "group": "rasporedjivanje",
+      "summary": "Skup spremnih aktivnosti koje čekaju CPU.",
+      "explanation": "Aktivnost ulazi u ready red kada je spremna da radi, ali nije trenutno na procesoru. Upravljanje ovim redom je praktična osnova scheduling-a.",
+      "pitfalls": [
+        "dugo zadržavanje jedne klase zadataka"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w31-3",
+      "label": "Interleaving",
+      "group": "osnove",
+      "summary": "Preplitanje koraka više niti u jednoj vremenskoj sekvenci.",
+      "explanation": "Interleaving čuva unutrašnji redosled svake niti, ali menja međusobni poredak između niti. To je ključni mentalni model konkurentnog izvršavanja.",
+      "pitfalls": [
+        "pretpostavka jedne putanje izvršavanja"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w31-4",
+      "label": "Nedeterminističko ponašanje",
+      "group": "opasnosti",
+      "summary": "Više legitimnih rasporeda daje više mogućih ishoda.",
+      "explanation": "Čak i kada je kod pojedinačne niti ispravan, kombinovani efekat može zavisiti od interleaving rasporeda. Analiza mora pokriti više mogućih scenarija izvršavanja.",
+      "pitfalls": [
+        "testiranje samo jednog rasporeda"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w31-5",
+      "label": "Pravičnost",
+      "group": "rasporedjivanje",
+      "summary": "Spremna aktivnost vremenom dobija priliku za izvršavanje.",
+      "explanation": "Pravičnost smanjuje rizik dugotrajnog čekanja. Bez nje sistem može biti funkcionalan globalno, ali neprihvatljiv za pojedinačne aktivnosti.",
+      "pitfalls": [
+        "starvation"
+      ],
+      "scenarios": [
+        "starvation"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "w31-2",
+      "target": "w31-0",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w31-1",
+      "target": "w31-0",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w31-0",
+      "target": "w31-3",
+      "relation": "omogucava"
+    },
+    {
+      "source": "w31-3",
+      "target": "w31-4",
+      "relation": "moze_dovesti_do"
+    },
+    {
+      "source": "w31-5",
+      "target": "w31-4",
+      "relation": "sprecava"
+    },
+    {
+      "source": "w31-0",
+      "target": "w31-5",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

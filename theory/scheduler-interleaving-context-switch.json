@@ -1,0 +1,78 @@
+{
+  "nodes": [
+    {
+      "id": "s0",
+      "label": "Scheduler",
+      "group": "rasporedjivanje",
+      "summary": "Bira sledeću spremnu aktivnost prema politici raspoređivanja.",
+      "pitfalls": ["nepravična politika"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "s1",
+      "label": "Ready queue",
+      "group": "rasporedjivanje",
+      "summary": "Red aktivnosti koje čekaju dodelu CPU-a.",
+      "pitfalls": ["dugo čekanje u redu"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "s2",
+      "label": "Politika raspoređivanja",
+      "group": "rasporedjivanje",
+      "summary": "Pravila po kojima scheduler odlučuje: prioritet, kvant, fairness.",
+      "pitfalls": ["favorizovanje jedne klase zadataka"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "s3",
+      "label": "Interleaving",
+      "group": "osnove",
+      "summary": "Preplitanje koraka niti koje menja mogući ishod programa.",
+      "pitfalls": ["lažan osećaj determinističnosti"],
+      "scenarios": ["mutex", "rendezvous"]
+    },
+    {
+      "id": "s4",
+      "label": "Nedeterminističko ponašanje",
+      "group": "opasnosti",
+      "summary": "Više validnih rasporeda dovodi do više mogućih ishoda.",
+      "pitfalls": ["test pokriva samo jedan raspored"],
+      "scenarios": ["mutex", "deadlock"]
+    },
+    {
+      "id": "s5",
+      "label": "Context switch",
+      "group": "rasporedjivanje",
+      "summary": "Save/restore konteksta pri smeni aktivne niti/procesa.",
+      "pitfalls": ["CPU overhead", "cache invalidacija"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "s6",
+      "label": "Overhead",
+      "group": "opasnosti",
+      "summary": "Previše smena konteksta smanjuje korisni rad CPU-a.",
+      "pitfalls": ["prevelik broj kratkih niti"],
+      "scenarios": ["starvation"]
+    },
+    {
+      "id": "s7",
+      "label": "Pravičnost (fairness)",
+      "group": "rasporedjivanje",
+      "summary": "Svaka spremna aktivnost treba da dobije šansu za izvršavanje.",
+      "pitfalls": ["starvation"],
+      "scenarios": ["starvation"]
+    }
+  ],
+  "edges": [
+    { "source": "s1", "target": "s0", "relation": "zahteva" },
+    { "source": "s2", "target": "s0", "relation": "zahteva" },
+    { "source": "s0", "target": "s5", "relation": "omogucava" },
+    { "source": "s0", "target": "s3", "relation": "omogucava" },
+    { "source": "s3", "target": "s4", "relation": "uzrokuje" },
+    { "source": "s5", "target": "s6", "relation": "uzrokuje" },
+    { "source": "s7", "target": "s4", "relation": "sprecava" },
+    { "source": "s7", "target": "s0", "relation": "zahteva" }
+  ]
+}

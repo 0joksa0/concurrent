@@ -1,0 +1,103 @@
+{
+  "nodes": [
+    {
+      "id": "w12-0",
+      "label": "Konkurentnost i paralelizam",
+      "group": "osnove",
+      "summary": "Povezani, ali različiti pojmovi.",
+      "explanation": "Konkurentnost znači preklapanje aktivnosti u vremenu. Paralelizam znači fizičko istovremeno izvršavanje na više izvršnih jedinica. Svaki paralelni sistem je konkurentan, ali ne važi obrnuto.",
+      "pitfalls": [
+        "zamena pojmova pri analizi korektnosti"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w12-1",
+      "label": "Jedno jezgro",
+      "group": "sistemi",
+      "summary": "Konkurentnost bez fizičkog paralelizma.",
+      "explanation": "Na jednom jezgru aktivnosti se smenjuju. U svakom trenutku radi jedna aktivnost, ali tokom vremena više aktivnosti napreduje, pa je sistem i dalje konkurentan.",
+      "pitfalls": [
+        "očekivanje istovremenog rada na jednom jezgru"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w12-2",
+      "label": "Više jezgara",
+      "group": "arhitektura",
+      "summary": "Konkurentnost sa mogućim pravim paralelizmom.",
+      "explanation": "Kada hardver ima više jezgara, različite aktivnosti mogu zaista raditi istovremeno. To pojačava performanse, ali ne uklanja potrebe za sinhronizacijom.",
+      "pitfalls": [
+        "fokus samo na ubrzanje"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w12-3",
+      "label": "Multiprogramiranje",
+      "group": "sistemi",
+      "summary": "Više programa je u memoriji i deli CPU.",
+      "explanation": "Multiprogramiranje je istorijska osnova konkurentnosti: kada jedan program čeka I/O, drugi koristi CPU. Cilj je povećanje ukupnog iskorišćenja sistema.",
+      "pitfalls": [
+        "nepravična raspodela vremena"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w12-4",
+      "label": "Time-sharing",
+      "group": "rasporedjivanje",
+      "summary": "Podela CPU vremena na kvante.",
+      "explanation": "Time-sharing uvodi vremenske intervale za aktivnosti. Brza smena stvara utisak istovremenosti i omogućava odziv interaktivnih sistema.",
+      "pitfalls": [
+        "prekratak kvant -> previše context switch"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w12-5",
+      "label": "OS kao sloj upravljanja",
+      "group": "sistemi",
+      "summary": "Operativni sistem raspodeljuje resurse i koordiniše izvršavanje.",
+      "explanation": "OS objedinjuje procese, niti, scheduling i politiku raspodele resursa. Zato konkurentnost nije izolovana tema već centralni deo rada operativnog sistema.",
+      "pitfalls": [
+        "zanemarivanje OS politike pri dizajnu"
+      ],
+      "scenarios": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "w12-0",
+      "target": "w12-1",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w12-0",
+      "target": "w12-2",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w12-3",
+      "target": "w12-4",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w12-4",
+      "target": "w12-5",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w12-0",
+      "target": "w12-3",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    },
+    {
+      "source": "w12-2",
+      "target": "w12-5",
+      "relation": "prosiruje_kontekst"
+    }
+  ]
+}

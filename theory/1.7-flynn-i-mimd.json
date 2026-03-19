@@ -1,0 +1,103 @@
+{
+  "nodes": [
+    {
+      "id": "w41-0",
+      "label": "Flynn klasifikacija",
+      "group": "arhitektura",
+      "summary": "Klasifikacija po broju instrukcionih i podatkovnih tokova.",
+      "explanation": "Flynn-ov model nudi 2x2 pogled na arhitekture: SISD, SIMD, MISD i MIMD. U kontekstu konkurentnosti, najvažnija je veza sa MIMD sistemima.",
+      "pitfalls": [
+        "mešanje arhitekturalnog modela i programskog modela"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w41-1",
+      "label": "SISD",
+      "group": "arhitektura",
+      "summary": "Jedan tok instrukcija, jedan tok podataka.",
+      "explanation": "SISD odgovara klasičnom sekvencijalnom modelu. Konkurentnost je ovde uglavnom logička i realizuje se interleaving-om.",
+      "pitfalls": [
+        "ograničeno fizičko ubrzanje"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w41-2",
+      "label": "SIMD",
+      "group": "arhitektura",
+      "summary": "Jedna instrukcija nad više podataka.",
+      "explanation": "SIMD je efikasan za regularne podatkovne obrasce. Nije primarni model za opštu sinhronizaciju niti, ali je važan za performanse.",
+      "pitfalls": [
+        "slabo uklapanje sa grananjem"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w41-3",
+      "label": "MISD",
+      "group": "arhitektura",
+      "summary": "Više instrukcija nad jednim tokom podataka (retko).",
+      "explanation": "MISD je uglavnom teorijski ili specijalan slučaj i retko se koristi kao glavni model opšteg programiranja.",
+      "pitfalls": [
+        "pogrešno poistovećivanje sa MIMD"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w41-4",
+      "label": "MIMD",
+      "group": "arhitektura",
+      "summary": "Više instrukcionih i više podatkovnih tokova.",
+      "explanation": "MIMD je dominantan model savremenih višejezgarnih sistema. Omogućava istovremeno izvršavanje više niti/procesa i zato direktno podržava paralelizam.",
+      "pitfalls": [
+        "kompleksna koordinacija i kontencija"
+      ],
+      "scenarios": []
+    },
+    {
+      "id": "w41-5",
+      "label": "OS i multiprocessor scheduling",
+      "group": "sistemi",
+      "summary": "OS mapira aktivnosti na više jezgara/procesora.",
+      "explanation": "U MIMD okruženju scheduler ima dodatni zadatak: raspodelu aktivnosti po više izvršnih jedinica uz balans opterećenja i poštovanje politike sistema.",
+      "pitfalls": [
+        "nebalansirano opterećenje jezgara"
+      ],
+      "scenarios": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "w41-0",
+      "target": "w41-1",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w41-0",
+      "target": "w41-2",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w41-0",
+      "target": "w41-3",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w41-0",
+      "target": "w41-4",
+      "relation": "primena_u_kontekstu"
+    },
+    {
+      "source": "w41-4",
+      "target": "w41-5",
+      "relation": "zahteva"
+    },
+    {
+      "source": "w41-0",
+      "target": "w41-4",
+      "relation": "nastavak_teme",
+      "relation_label": "sledeći korak"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "nodes": [
+    {
+      "id": "p0",
+      "label": "Proces",
+      "group": "osnove",
+      "summary": "Izvršna instanca programa sa adresnim prostorom, resursima i kontekstom.",
+      "pitfalls": ["mešanje vlasništva resursa i toka izvršavanja"],
+      "scenarios": ["deadlock", "starvation"]
+    },
+    {
+      "id": "p1",
+      "label": "Nit",
+      "group": "osnove",
+      "summary": "Minimalna jedinica izvršavanja unutar procesa.",
+      "pitfalls": ["nekontrolisano deljenje stanja"],
+      "scenarios": ["rendezvous", "mutex", "producer_consumer"]
+    },
+    {
+      "id": "p2",
+      "label": "Deljeni adresni prostor",
+      "group": "sinhronizacija",
+      "summary": "Niti dele globalne promenljive, heap i otvorene deskriptore.",
+      "pitfalls": ["pisanje bez zaštite"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "p3",
+      "label": "Privatni stek niti",
+      "group": "sinhronizacija",
+      "summary": "Svaka nit ima sopstveni stack, PC i registre.",
+      "pitfalls": ["prosleđivanje adrese lokalnih promenljivih"],
+      "scenarios": ["rendezvous"]
+    },
+    {
+      "id": "p4",
+      "label": "Kritična sekcija",
+      "group": "sinhronizacija",
+      "summary": "Deo koda koji mora biti atomaran u odnosu na ostale niti.",
+      "pitfalls": ["predugo držanje zaključavanja"],
+      "scenarios": ["mutex", "producer_consumer"]
+    },
+    {
+      "id": "p5",
+      "label": "Sinhronizacija",
+      "group": "sinhronizacija",
+      "summary": "Mehanizmi za koordinaciju redosleda i pristupa deljenom stanju.",
+      "pitfalls": ["nebalansiran wait/post"],
+      "scenarios": ["smoking", "producer_consumer"]
+    },
+    {
+      "id": "p6",
+      "label": "Race condition",
+      "group": "opasnosti",
+      "summary": "Rezultat zavisi od trenutnog rasporeda izvršavanja niti.",
+      "pitfalls": ["teško reprodukovanje grešaka"],
+      "scenarios": ["mutex"]
+    },
+    {
+      "id": "p7",
+      "label": "producer consumer",
+      "group": "obrasci",
+      "summary": "Klasičan obrazac koordinacije proizvodnje i potrošnje preko bafera.",
+      "pitfalls": ["underflow/overflow", "nepravilno zaključavanje"],
+      "scenarios": ["producer_consumer"]
+    }
+  ],
+  "edges": [
+    { "source": "p0", "target": "p1", "relation": "podrska_za" },
+    { "source": "p1", "target": "p2", "relation": "zahteva" },
+    { "source": "p1", "target": "p3", "relation": "zahteva" },
+    { "source": "p2", "target": "p4", "relation": "zahteva" },
+    { "source": "p5", "target": "p4", "relation": "omogucava" },
+    { "source": "p4", "target": "p6", "relation": "sprecava" },
+    { "source": "p5", "target": "p7", "relation": "podrska_za" },
+    { "source": "p2", "target": "p7", "relation": "zahteva" }
+  ]
+}
