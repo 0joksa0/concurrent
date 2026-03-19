@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import {
   buildMoodleXml,
   createEmptyQuestion,
-  parseMoodleXml
+  parseMoodleXml,
+  parseQuizText
 } from '../features/quiz/moodleXml.js';
 import '../features/quiz/quiz-admin.css';
 
@@ -161,22 +162,43 @@ export function QuizAdminPage() {
     setStatusText('Resetovan editor.');
   }
 
-  async function importXml(file) {
+  async function importQuizFile(file) {
     if (!file) {
       return;
     }
     try {
       const text = await file.text();
-      const parsed = parseMoodleXml(text);
+      const ext = String(file.name || '').toLowerCase();
+      let parsed;
+      let source = 'xml';
+
+      if (ext.endsWith('.txt') || ext.endsWith('.quiz') || ext.endsWith('.questions')) {
+        parsed = parseQuizText(text);
+        source = 'text';
+      } else {
+        try {
+          parsed = parseMoodleXml(text);
+          source = 'xml';
+        } catch {
+          parsed = parseQuizText(text);
+          source = 'text';
+        }
+      }
+
       setCategoryPath(parsed.categoryPath || '$course$/top/Programiranje');
+      if (parsed.quizTitle) {
+        setQuizTitle(parsed.quizTitle);
+      }
       setQuestions(parsed.questions.length > 0 ? parsed.questions : [createEmptyQuestion('multichoice')]);
-      if (parsed.unsupportedTypes.length > 0) {
+      if (parsed.unsupportedTypes?.length > 0) {
         setStatusText(`Uvezeno uz preskakanje tipova: ${parsed.unsupportedTypes.join(', ')}`);
+      } else if (source === 'text') {
+        setStatusText(`Uvezeno ${parsed.questions.length} pitanja iz text formata.`);
       } else {
         setStatusText(`Uvezeno ${parsed.questions.length} pitanja.`);
       }
     } catch (error) {
-      setStatusText(error.message || 'Greška pri importu XML-a.');
+      setStatusText(error.message || 'Greška pri importu fajla.');
     }
   }
 
@@ -190,8 +212,8 @@ export function QuizAdminPage() {
         <div className="qa-actions">
           <input
             type="file"
-            accept=".xml,.txt,.html,.xhtml"
-            onChange={(e) => importXml(e.target.files?.[0] || null)}
+            accept=".xml,.txt,.quiz,.questions,.html,.xhtml"
+            onChange={(e) => importQuizFile(e.target.files?.[0] || null)}
           />
           <button type="button" onClick={downloadXml}>Export Moodle XML</button>
         </div>
@@ -432,6 +454,7 @@ export function QuizAdminPage() {
             <h2>Podržano</h2>
             <ul>
               <li>Import/export: multichoice, truefalse, shortanswer</li>
+              <li>Import text formata (`.txt`, `.quiz`, `.questions`) i automatska konverzija u Moodle XML</li>
               <li>Auto-score za multichoice: tačni dele +100, netačni dele -100 (select-all = 0)</li>
               <li>Category pitanje se čuva kao `type="category"`</li>
               <li>Ako ubaciš XHTML export iz Moodla, editor javlja grešku</li>

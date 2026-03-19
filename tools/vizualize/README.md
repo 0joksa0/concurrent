@@ -28,6 +28,7 @@ Aplikacija je single-page (`index.html`) i koristi rute:
 
 - `#/` - Trace Viewer
 - `#/theory` - Theory Mind Maps
+- `#/admin` - Quiz Admin (Moodle XML + text import)
 
 ## Build
 
@@ -86,3 +87,52 @@ Trace:
 - timeline scrub
 - simple/detailed view
 - auto thread jump
+
+## Quiz text import format
+
+`Quiz Admin` podrzava import iz `.txt`, `.quiz`, `.questions` i konverziju u Moodle XML.
+
+Opsta pravila:
+
+- Header (opciono, na pocetku fajla):
+  - `@title: Naziv kviza`
+  - `@category: $course$/top/Programiranje`
+- Pitanja su razdvojena linijom `---`
+- Komentar linije: `// ...`
+- Kljucevi su `key: value`
+- Za odgovore koristi `answers:` pa linije:
+  - `+ tekst | feedback` (tacan)
+  - `- tekst | feedback` (netacan)
+  - `[50] tekst | feedback` (rucni procenat/fraction)
+
+Primer:
+
+```txt
+@title: Nedelja 1 - Semafori
+@category: $course$/top/OS/Kvizovi
+
+type: multichoice
+name: Mutex osnova
+question: Sta mutex garantuje?
+single: true
+answers:
+  + Medjusobno iskljucivanje | Tacno.
+  - Fer raspodelu CPU vremena | To radi scheduler.
+  - Da nikad nema cekanja | Nije tacno.
+---
+type: truefalse
+name: Deadlock tvrdnja
+question: Deadlock znaci da sve niti mogu da nastave.
+correct: false
+true_feedback: Nije tacno.
+false_feedback: Tacno.
+---
+type: shortanswer
+name: Naziv primitiva
+question: Kako se zove P operacija nad semaforom?
+usecase: 0
+answers:
+  [100] wait | Tacno.
+  [100] down | Takodje tacno.
+  [50] p | Prihvatljivo skraceno.
+```
